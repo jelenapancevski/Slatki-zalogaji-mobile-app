@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="input">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:color">@color/antiquebrass</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="title">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">50dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/pink</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:fontFamily">@font/inspiration</item>
+    </style>
+    <style name="loginbutton">
+        <item name="android:backgroundTint">@color/antiquebrass</item>
+        <item name="android:fontFamily">@font/atma</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20dp</item>
+
+    </style>
+    <style name="message">
+        <item name="android:background">@color/white</item>
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/darkred</item>
+        <item name="android:textSize">24sp</item>
+
+    </style>
+
+    // Contact styles
+    <style name="contact_title">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/darkbrown</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:fontFamily">@font/inspiration</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="contact_header">
+        <item name="android:fontFamily">@font/atma</item>
+        <item name="android:textColor">@color/darkbrown</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom"> 10dp</item>
+    </style>
+    <style name="contact_row">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom"> 10dp</item>
+    </style>
+
+    // Menu
+
+    <style name="menu_option">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/darkbrown</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    // Promotions
+    <style name="promotion_header_title">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="promotion_text">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    // Product
+    <style name="product_name">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/darkbrown</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="cakes_title">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/pink</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>
+

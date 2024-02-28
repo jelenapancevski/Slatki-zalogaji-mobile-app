@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <item
+        android:id="@+id/action_products"
+        android:title="Proizvodi"
+        android:theme="@style/menu_option"
+        />
+
+    <item
+        android:id="@+id/action_promotions"
+        android:title="Promocije"
+        />
+    <item
+        android:id="@+id/action_contact"
+        android:title="Kontakt" >
+
+    </item>
+    <item
+        android:id="@+id/action_basket"
+        android:title="Korpa" >
+
+    </item>
+    <item
+        android:id="@+id/action_notifications"
+        android:title="Obavestenja" >
+
+    </item>
+    <item
+        android:id="@+id/action_profile"
+        android:title="Profil" >
+
+    </item>
+    <item
+        android:id="@+id/action_logout"
+        android:title="Odjavi se" >
+
+    </item>
+</menu>
+
+
+
