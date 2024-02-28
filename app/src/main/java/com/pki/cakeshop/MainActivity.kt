@@ -1,11 +1,14 @@
 package com.pki.cakeshop
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import retrofit2.Call
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.UserViewModel
@@ -41,7 +44,17 @@ class MainActivity : AppCompatActivity() {
                             val user = response.body()
                             if (user != null) {
                                 if(user.type=="visitor"){
-                                        // go to homepage and save the logged in user
+                                    // go to homepage and save the logged in user
+                                    val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
+                                    val editor = pref.edit()
+                                    editor.putString("user", Gson().toJson(user))
+                                   /* with(pref.edit()){
+                                        putString("users", Gson().toJson(users))
+                                        apply()
+                                    }*/
+                                    editor.apply()
+                                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                                    startActivity(intent)
                                 }
                                 else {
                                     message.text="Uneti kredencijali nisu validni"

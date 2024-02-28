@@ -1,7 +1,8 @@
 package com.pki.cakeshop.models
 
 data class User(
-    var username: String,
+    var _id:String,
+    var username: String?,
     var password: String,
     var firstname: String,
     var lastname: String,

@@ -8,10 +8,14 @@ import org.bson.types.ObjectId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 class UserRepository(private val userService: UserService) {
-
+    // returns all users
+    fun get(callback: Callback<List<User>>){
+        userService.get().enqueue(callback)
+    }
     fun login( username:String,password:String, callback: Callback<User>) {
         userService.login(username,password).enqueue(callback)
     }
@@ -28,14 +32,6 @@ class UserRepository(private val userService: UserService) {
     }
     // get user
     fun user(id: String, callback: Callback<User>) {
-        // Create a map representing the request body data
-     //   val requestData = mapOf("id" to id)
-
-        // Convert the request body data to JSON string
-       // val requestBody = Gson().toJson(requestData)
-
-        // Log the JSON data before making the Retrofit call
-        //Log.d("RequestData", "User Request Body: $requestBody")
         userService.user(id).enqueue(callback)
     }
 }

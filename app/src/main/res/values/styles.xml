@@ -5,6 +5,7 @@
         <item name="android:color">@color/antiquebrass</item>
         <item name="android:textSize">25dp</item>
         <item name="android:background">@color/white</item>
+        <item name="android:textColorHint">@color/pink</item>
     </style>
 
     <style name="title">
@@ -94,5 +95,30 @@
         <item name="android:gravity">center</item>
     </style>
 
+    //Profile style
+
+    <style name="profile_buttons">
+        <item name="android:textColor">@color/pink</item>
+        <item name="android:fontFamily">@font/atma</item>
+        <item name="android:textSize">50px</item>
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
+    <style name="profile_row">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/pink</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_marginBottom"> 10dp</item>
+        <item name="android:layout_marginLeft"> 10dp</item>
+    </style>
+
+    <style name="cancel_button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/atma</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
 </resources>
 

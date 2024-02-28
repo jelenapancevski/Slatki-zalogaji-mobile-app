@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/profilebackground"
+    >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="186dp"
+        android:background="@color/white"
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            >
+
+            <Button
+                android:id="@+id/changepassword"
+                style="@style/profile_buttons"
+                android:text="Promeni lozinku"
+                android:textAlignment="center"></Button>
+
+            <Button
+                android:id="@+id/editdata"
+                style="@style/profile_buttons"
+                android:text="Izmeni detalje"
+                android:textAlignment="center"></Button>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                style="@style/profile_row"
+                android:text="Ime:"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/firstname"
+                style="@style/profile_row"
+                >
+            </TextView>
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                style="@style/profile_row"
+                android:text="Prezime:"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/lastname"
+                style="@style/profile_row"
+                >
+            </TextView>
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                style="@style/profile_row"
+                android:text="Korisničko ime:"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/username"
+                style="@style/profile_row"
+                >
+            </TextView>
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                style="@style/profile_row"
+                android:text="Adresa:"
+                >
+            </TextView>
+            <TextView
+                style="@style/profile_row"
+                android:id="@+id/address"
+                >
+            </TextView>
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <TextView
+                style="@style/profile_row"
+                android:text="Kontakt telefon:"></TextView>
+            <TextView
+                style="@style/profile_row"
+                android:id="@+id/phone"
+                ></TextView>
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                style="@style/profile_row"
+                android:text="Email adresa:"></TextView>
+            <TextView
+                style="@style/profile_row"
+                android:id="@+id/email"
+                ></TextView>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

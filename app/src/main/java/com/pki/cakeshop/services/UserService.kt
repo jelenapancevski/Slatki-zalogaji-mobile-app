@@ -10,6 +10,10 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 interface UserService {
+    // returns all users
+    @GET("user/get")
+    fun get() : Call<List<User>>
+
     @FormUrlEncoded
     @POST("user/login")
     fun login(@Field("username")username:String, @Field("password") password:String): Call<User>
@@ -21,7 +25,6 @@ interface UserService {
     fun checkavailability(@Field("username") username: String, @Field("email") email: String): Call<List<User>>
 
     // change password
-    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("user/changePassword")
     fun changePassword(@Field("id")id:String, @Field("newpassword") newpassword:String):Call<String>
