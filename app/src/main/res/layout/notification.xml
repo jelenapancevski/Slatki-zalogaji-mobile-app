@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_margin="8dp"
+    app:strokeColor="#FFFF"
+    app:cardBackgroundColor="#FFFF"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Header TextView -->
+        <TextView
+            android:id="@+id/status"
+            style="@style/order_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Vaša porudžbina kreirana {{showdate(order.date)}} je odbijena."
+            />
+        <TextView
+            style="@style/order_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Detalji porudžbine"
+            />
+        <!-- Svaka stavka u porudzbini -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="30pt"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="71dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/black"/>
+        <TextView
+            android:id="@+id/price"
+            style="@style/order_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Ukupna cena: 5000 din"
+            />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

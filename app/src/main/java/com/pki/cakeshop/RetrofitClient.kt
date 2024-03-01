@@ -2,6 +2,7 @@ package com.pki.cakeshop
 
 import android.util.Log
 import com.pki.cakeshop.models.Promotion
+import com.pki.cakeshop.services.OrderService
 import com.pki.cakeshop.services.ProductService
 import com.pki.cakeshop.services.PromotionService
 import com.pki.cakeshop.services.UserService
@@ -41,5 +42,8 @@ object RetrofitClient {
     }
     val productService: ProductService by lazy {
         retrofit.create(ProductService::class.java)
+    }
+    val orderService: OrderService by lazy {
+        retrofit.create(OrderService::class.java)
     }
 }

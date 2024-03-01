@@ -1,9 +1,9 @@
 package com.pki.cakeshop
-
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +24,8 @@ class CakesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.cakes)
+        setContentView(R.layout.allproducts)
+        findViewById<TextView>(R.id.title).text="Torte"
         productViewModel = ProductViewModel()
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(LinearLayoutManager(this));
@@ -36,15 +37,15 @@ class CakesActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     cakes = response.body()!!
-                    Log.e("CAKES FOUND",cakes.size.toString())
+                    //Log.e("CAKES FOUND",cakes.toString())
                     getImages()
-                    adapter = ProductAdapter(cakes,images)
+                    adapter = ProductAdapter(this@CakesActivity,cakes,images)
                     recyclerView.adapter=adapter
 
                 } else {
                     // Handle the case where the request was not successful
                     Log.e("CakesActivity", "Request failed: ${response.code()}")
-                    Log.e("ERRROR", "" + call.request().body)
+                    //Log.e("ERRROR", "" + call.request().body)
                 }
             }
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {

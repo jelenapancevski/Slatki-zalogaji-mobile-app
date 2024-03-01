@@ -9,7 +9,6 @@ data class User(
     var address: Address,
     var phone: String,
     var email: String,
-    var image: String, //ne treba
     var type: String // visitor, staff
 )
 

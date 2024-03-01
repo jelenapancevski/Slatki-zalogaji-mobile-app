@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Cakeshop"
         tools:targetApi="31">
         <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChangePasswordActivity"
             android:exported="false" />
         <activity
@@ -27,6 +33,12 @@
             android:exported="false" />
         <activity
             android:name=".PromotionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CakesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DessertsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

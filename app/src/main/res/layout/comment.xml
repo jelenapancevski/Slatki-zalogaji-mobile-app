@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+android:layout_margin="8dp"
+app:strokeColor="#FFFF"
+app:cardBackgroundColor="#FFFF"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- Header TextView -->
+    <TextView
+        android:id="@+id/username"
+        style="@style/comment_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Djoxon"
+        />
+    <TextView
+        android:id="@+id/dateandtime"
+        style="@style/comment_dateandtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="15/02/2024 15:30h"
+        />
+
+    <TextView
+        android:id="@+id/comment"
+        style="@style/comment_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Narucio sam je za rodjendan svi gosti su bili odusevljeni preporucio bih je svakome."
+        />
+
+</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

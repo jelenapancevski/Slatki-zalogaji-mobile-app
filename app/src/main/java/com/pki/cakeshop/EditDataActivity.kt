@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Address
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.UserViewModel
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,10 +20,24 @@ class EditDataActivity : AppCompatActivity() {
     private lateinit var user: User
     private lateinit var users: List<User>
     private lateinit var userViewModel: UserViewModel
+
+    fun isEmailValid(email: String): Boolean {
+        val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
+        return emailRegex.toRegex().matches(email)
+    }
+    fun phoneNumber(input: String): Boolean {
+        val phoneNumberRegex = Regex("^06[0-9]{7,8}\$")
+        return phoneNumberRegex.containsMatchIn(input)
+    }
+    // check if number of street is correct pattern
+    fun streetNumber(input: String): Boolean {
+        val streetNumberRegex = Regex("^[1-9]+[0-9]*\$")
+        return streetNumberRegex.containsMatchIn(input)
+    }
     fun emailTaken(_id:String,email:String):Boolean{
         var found:Boolean=false
-            users.forEach { user-> if(user.email==email && user._id!=_id) found=true }
-            return found
+        users.forEach { user-> if(user.email==email && user._id!=_id) found=true }
+        return found
 
 
     }
@@ -80,14 +96,25 @@ class EditDataActivity : AppCompatActivity() {
                return@setOnClickListener
            }
             // check if number of street is correct pattern
+            if(!streetNumber(findViewById<TextView>(R.id.number).text.toString())){
+                findViewById<TextView>(R.id.number).error = "Pogrešan format"
+                return@setOnClickListener
+            }
             //phone number correct pattern
+            if(!phoneNumber(findViewById<TextView>(R.id.phone).text.toString())){
+                findViewById<TextView>(R.id.phone).error = "Pogrešan format e.g. 061123456"
+                return@setOnClickListener
+            }
             //email format and taken
-            //check if username is taken
+            if(!isEmailValid(findViewById<TextView>(R.id.email).text.toString())){
+                findViewById<TextView>(R.id.email).error = "Pogrešan format"
+                return@setOnClickListener
+            }
+
             if(emailTaken(user._id,findViewById<TextView>(R.id.email).text.toString())){
                 findViewById<TextView>(R.id.message).text =  "Email adresa je zauzeta"
                 return@setOnClickListener
             }
-
 
             //valid update data
             var newuser:User = User(
@@ -103,22 +130,22 @@ class EditDataActivity : AppCompatActivity() {
                 ),
                 findViewById<TextView>(R.id.phone).text.toString(),
                 findViewById<TextView>(R.id.email).text.toString(),
-                user.image,
                 user.type)
 
-                userViewModel.edit(newuser,object : Callback<String> {
+            Log.e("USER", newuser.toString())
+            userViewModel.edit(newuser,object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    findViewById<TextView>(R.id.message).text= response.message()
+                    findViewById<TextView>(R.id.message).text= newuser._id
                     // Return to profile and update user
                     userViewModel.user(user._id,object:Callback<User>{
                         override fun onResponse(call: Call<User>, response: Response<User>) {
-                            val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
-                            val editor = pref.edit()
-                            editor.putString("user", Gson().toJson(response.body()))
-                            editor.apply()
-                            val intent = Intent(this@EditDataActivity, ProfileActivity::class.java)
-                            startActivity(intent)
-                        }
+                             val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
+                              val editor = pref.edit()
+                              editor.putString("user", Gson().toJson(response.body()))
+                              editor.apply()
+                              val intent = Intent(this@EditDataActivity, ProfileActivity::class.java)
+                              startActivity(intent)
+                          }
 
                         override fun onFailure(call: Call<User>, t: Throwable) {
                             TODO("Not yet implemented")

@@ -1,6 +1,8 @@
 package com.pki.cakeshop.services
+import com.google.gson.Gson
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.User
+import okhttp3.RequestBody
 import org.bson.types.ObjectId
 import retrofit2.Call
 import retrofit2.http.Body
@@ -19,7 +21,7 @@ interface UserService {
     fun login(@Field("username")username:String, @Field("password") password:String): Call<User>
 
     // check if username and email are unique
-    @Headers("Content-Type: application/json")
+
     @FormUrlEncoded
     @POST("user/checkavailability")
     fun checkavailability(@Field("username") username: String, @Field("email") email: String): Call<List<User>>
@@ -30,9 +32,12 @@ interface UserService {
     fun changePassword(@Field("id")id:String, @Field("newpassword") newpassword:String):Call<String>
 
     // edit personal info
-    @Headers("Content-Type: application/json")
+    @FormUrlEncoded
     @POST("user/edit")
-    fun edit(@Body user:User):Call<String>
+    fun edit(@Field("user") user:User):Call<String>
+    companion object {
+        val gson = Gson()
+    }
 
     // get user
     @FormUrlEncoded

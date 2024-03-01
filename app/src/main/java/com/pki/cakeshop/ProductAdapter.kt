@@ -1,15 +1,19 @@
 package com.pki.cakeshop
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.pki.cakeshop.models.Product
-class ProductAdapter (private val products: List<Product>, private val images: Map<String,Bitmap>) :
+class ProductAdapter ( private val context: Context, private val products: List<Product>, private val images: Map<String,Bitmap>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-    class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+   inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView
         val image: ImageView
 
@@ -24,12 +28,31 @@ class ProductAdapter (private val products: List<Product>, private val images: M
                 image.setImageBitmap(img)
             }
             name.setText(product.name)
+
+            image.setOnClickListener{
+                val pref = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.putString("product", Gson().toJson(product))
+                editor.putString("product_image",Gson().toJson(img))
+                editor.apply()
+                val intent = Intent(context, ProductActivity::class.java)
+                context.startActivity(intent)
+            }
+            name.setOnClickListener{
+                val pref = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.putString("product", Gson().toJson(product))
+                editor.putString("product_image",Gson().toJson(img))
+                editor.apply()
+                val intent = Intent(context, ProductActivity::class.java)
+                context.startActivity(intent)
+            }
         }
     }
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.product, viewGroup, false)
+            .inflate(R.layout.products, viewGroup, false)
         return ProductViewHolder(view)
     }
 

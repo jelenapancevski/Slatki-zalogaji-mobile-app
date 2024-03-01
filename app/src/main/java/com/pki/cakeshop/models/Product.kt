@@ -10,11 +10,11 @@ data class Comment (
 )
 data class Product(
  var _id:String,
+ var ingridients: List<String>,
  var name:String,
  var description:String,
  var type: String,
  var image: String,
- var ingridents: List<String>,
  var price:Int,
  var comments: List <Comment>
 )
