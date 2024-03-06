@@ -12,6 +12,8 @@ import retrofit2.http.Path
 import java.util.Date
 
 interface ProductService {
+    @GET("product/get")
+    fun get () :Call<List<Product>>
     @GET("/api/products/{name}")
     fun getImage(@Path("name") name: String): Call<ResponseBody>
     @FormUrlEncoded

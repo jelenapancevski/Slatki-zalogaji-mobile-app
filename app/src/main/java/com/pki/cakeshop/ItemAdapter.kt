@@ -2,6 +2,7 @@ package com.pki.cakeshop
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.ProductInfo
+import com.pki.cakeshop.viewmodels.ProductViewModel
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.IOException
 
-class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val products: List<Product>, private val images: Map<String,Bitmap>) :
+class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val products: List<Product>, private val productViewModel: ProductViewModel/*, private val images: Map<String,Bitmap>*/) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
        val image: ImageView
@@ -29,13 +36,41 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
            price = view.findViewById(R.id.price)
         }
 
-        fun bind(productsinfo: ProductInfo,product:Product,image:Bitmap?) {
-            image?.let { image->
-               this.image.setImageBitmap(image)
-            }
+        fun bind(productsinfo: ProductInfo,product:Product/*,image:Bitmap?*/) {
+            /*image?.let { img->
+               this.image.setImageBitmap(img)
+            }*/
+            productViewModel.getImage(
+                product._id + "." + product.image,
+                object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if (response.isSuccessful && response.body() != null && response.body()!!
+                                .contentLength() > 0
+                        ) {
+                            try {
+                                val byteArray = response.body()?.bytes()
+                                if (byteArray != null) {
+                                    val bitmap =
+                                        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                                    image.setImageBitmap(bitmap)
+                                }
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.e("NotificationsActivity", "Request failed: ${t.message}")
+                    }
+
+                })
             name.setText(product.name)
-            quantity.setText(productsinfo.amount)
-            price.setText(product.price)
+            quantity.setText(productsinfo.amount.toString())
+            price.setText(product.price.toString())
         }
     }
     // Create new views (invoked by the layout manager)
@@ -49,8 +84,8 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         val productinfo = productsinfo[position]
         val product = products[position]
-        val image = images[product._id+"."+product.image]
-        viewHolder.bind(productinfo,product,image)
+        //val image = images[product._id+"."+product.image]
+        viewHolder.bind(productinfo,product/*,image*/)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

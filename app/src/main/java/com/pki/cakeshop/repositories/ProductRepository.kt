@@ -11,10 +11,14 @@ import retrofit2.Callback
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 import java.util.Date
 
 class ProductRepository(private val productService:ProductService) {
+    fun get (callback:Callback<List<Product>>){
+        productService.get().enqueue(callback)
+    }
     fun type(type:String,callback: Callback<List<Product>>) {
         productService.type(type).enqueue(callback)
     }
