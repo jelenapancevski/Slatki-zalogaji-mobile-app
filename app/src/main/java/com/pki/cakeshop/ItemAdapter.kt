@@ -70,7 +70,7 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
                 })
             name.setText(product.name)
             quantity.setText(productsinfo.amount.toString())
-            price.setText(product.price.toString())
+            price.setText(product.price.toString()+" din")
         }
     }
     // Create new views (invoked by the layout manager)

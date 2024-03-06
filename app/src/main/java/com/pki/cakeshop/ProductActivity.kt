@@ -19,7 +19,6 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var  userViewModel:UserViewModel
     private lateinit var product: Product
     private lateinit var image:Bitmap
-    private var usernames: MutableList<String> = mutableListOf()
     private lateinit var commentsView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,28 +32,14 @@ class ProductActivity : AppCompatActivity() {
         commentsView.setLayoutManager(LinearLayoutManager(this));
         findViewById<TextView>(R.id.name).text=product.name
         findViewById<TextView>(R.id.description).text=product.description
-        findViewById<TextView>(R.id.price).text="Cena "+product.price+" din"
+        findViewById<TextView>(R.id.price).text="Cena "+product.price.toString()+" din"
         findViewById<ImageView>(R.id.image).setImageBitmap(image)
         var ingredients:String=""
         product.ingridients.forEach { ingredient->
             ingredients+=ingredient+"\n"
         }
         findViewById<TextView>(R.id.ingredients).text=ingredients
-        product.comments.forEach { comment->
-            userViewModel.user(comment.username,object: Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if(response.isSuccessful){
-                        usernames.add(response.body()?.username!!)
-                       // commentAdapter.notifyDataSetChanged()
-                    }
-                }
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.e("ProductActivity","Couldn't find user with _id="+comment.username)
-                }
-
-            })
-        }
-        commentAdapter = CommentAdapter(product.comments,usernames)
+        commentAdapter = CommentAdapter(product.comments,userViewModel)
         commentsView.adapter=commentAdapter
     }
 }

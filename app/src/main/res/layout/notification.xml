@@ -29,6 +29,45 @@
             android:paddingLeft="16dp"
             android:text="Detalji porudžbine"
             />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/order_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:layout_weight="6"
+                    />
+                <TextView
+                    style="@style/order_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:text="Količina"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    style="@style/order_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Cena"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    style="@style/order_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:layout_weight="1"
+                    />
+            </TableRow>
+        </TableLayout>
         <!-- Svaka stavka u porudzbini -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

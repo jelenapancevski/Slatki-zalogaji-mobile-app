@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ProductActivity"
-    android:background="@color/white">
+    android:background="@color/offwhite">
 
     <TextView
         android:layout_width="match_parent"
@@ -30,7 +34,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/description"
         style="@style/product_info_description"
-        android:text="Opis tortesdsmdksd"
+
+        android:text="Ova Švarcvald torta kombinuje bogate slojeve čokoladne torte sa
+svežim višnjama, likerom od trešanja i jednostavnom glazurom od
+slatke pavlake."
         app:layout_constraintTop_toBottomOf="@id/image"
         >
     </TextView>
@@ -55,17 +62,30 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sastojci\n sastojci"
         android:id="@+id/ingredients"
+        android:paddingLeft="10pt"
         style="@style/product_info_ingredients"
         app:layout_constraintTop_toBottomOf="@id/subtitle"
         >
     </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Komentari"
+        android:id="@+id/commentstitle"
+        style="@style/product_info_price"
+        android:textAlignment="viewStart"
+        android:padding="15pt"
+        app:layout_constraintTop_toBottomOf="@id/ingredients"
+        ></TextView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="30pt"
-        app:layout_constraintTop_toBottomOf="@id/ingredients" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/comment"
+        app:layout_constraintTop_toBottomOf="@id/commentstitle"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                                         apply()
                                     }*/
                                     editor.apply()
-                                    val intent = Intent(this@MainActivity, NotificationsActivity::class.java)
+                                    val intent = Intent(this@MainActivity, CakesActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else {
