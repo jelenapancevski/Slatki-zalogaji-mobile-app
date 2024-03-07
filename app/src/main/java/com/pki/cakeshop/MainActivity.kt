@@ -48,12 +48,8 @@ class MainActivity : AppCompatActivity() {
                                     val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
                                     val editor = pref.edit()
                                     editor.putString("user", Gson().toJson(user))
-                                   /* with(pref.edit()){
-                                        putString("users", Gson().toJson(users))
-                                        apply()
-                                    }*/
                                     editor.apply()
-                                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                                    val intent = Intent(this@MainActivity, CakesActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else {

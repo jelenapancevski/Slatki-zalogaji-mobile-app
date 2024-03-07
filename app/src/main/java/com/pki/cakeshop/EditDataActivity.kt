@@ -120,8 +120,8 @@ class EditDataActivity : AppCompatActivity() {
             //valid update data
             var newuser:User = User(
                 user._id,
-                user.password,
                 findViewById<TextView>(R.id.username).text.toString(),
+                user.password,
                 findViewById<TextView>(R.id.firstname).text.toString(),
                 findViewById<TextView>(R.id.lastname).text.toString(),
                 Address(

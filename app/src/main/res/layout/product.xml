@@ -100,7 +100,7 @@ slatke pavlake."
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:hint="Količina"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
 
@@ -108,10 +108,21 @@ slatke pavlake."
             </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:text="Dodaj u korpu"
+                android:id="@+id/addtobasket"
                 style="@style/loginbutton"
                 android:layout_gravity="center">
 
             </Button>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                style="@style/comment_comment"
+                android:text="Ovde ide poruka"
+                android:id="@+id/message">
+
+            </TextView>
         </TableRow>
     </TableLayout>
 

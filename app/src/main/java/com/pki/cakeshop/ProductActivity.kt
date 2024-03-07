@@ -1,5 +1,6 @@
 package com.pki.cakeshop
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.pki.cakeshop.models.Comment
 import com.pki.cakeshop.models.CommentData
+import com.pki.cakeshop.models.Order
+import com.pki.cakeshop.models.ProductInfo
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.ProductViewModel
 import com.pki.cakeshop.viewmodels.UserViewModel
@@ -31,6 +34,8 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var newcomment: TextInputEditText
     private lateinit var user:User
+    private lateinit var amount:TextInputEditText
+    private lateinit var order:Order
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product)
@@ -40,6 +45,7 @@ class ProductActivity : AppCompatActivity() {
         product = Gson().fromJson(pref.getString("product",null),Product::class.java)
         image = Gson().fromJson(pref.getString("product_image",null),Bitmap::class.java)
         user = Gson().fromJson(pref.getString("user",null),User::class.java)
+
         if(user==null){
             //error
         }
@@ -56,6 +62,31 @@ class ProductActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.ingredients).text=ingredients
         commentAdapter = CommentAdapter(product.comments,userViewModel)
         commentsView.adapter=commentAdapter
+
+        amount = findViewById(R.id.amount)
+        findViewById<Button>(R.id.addtobasket).setOnClickListener{
+            if(amount.text.isNullOrBlank()){
+                return@setOnClickListener
+
+            }
+            if(pref.getString("order",null)==null){
+                order = Order(user._id, mutableListOf(),Date(),"pending",false)
+            }
+            else order = Gson().fromJson(pref.getString("order",null),Order::class.java)
+
+            order.products.add(ProductInfo(product._id,Integer.parseInt(amount.text.toString())))
+
+            Log.e("ORDER",order.toString())
+            findViewById<TextView>(R.id.message).text="Proizvod je uspešno dodat u korpu!"
+            //save updated order
+            val editor = pref.edit()
+            editor.putString("order", Gson().toJson(order))
+            editor.apply()
+            // treba promeniti
+            val intent = Intent(this@ProductActivity, BasketActivity::class.java)
+            startActivity(intent)
+
+        }
 
         newcomment = findViewById(R.id.newcomment)
         findViewById<Button>(R.id.addcomment).setOnClickListener{

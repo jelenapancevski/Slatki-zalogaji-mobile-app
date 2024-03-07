@@ -78,7 +78,7 @@ class NotificationsActivity : AppCompatActivity() {
 
                                     var notificationProducts: List<Product> = getProducts(notification.products)
 
-                                    price.text = "Total Amount: "+ calculatePrice(notificationProducts,notification.products)+" rsd"
+                                    price.text = "Ukupna cena: "+ calculatePrice(notificationProducts,notification.products)+" rsd"
 
                                     // Set up RecyclerView for products
                                     Log.e("InfoProdukti", notification.products.toString())
@@ -86,7 +86,7 @@ class NotificationsActivity : AppCompatActivity() {
                                     Log.e("ProductViewModel",productViewModel.toString())
 
                                     recyclerView.layoutManager = LinearLayoutManager(notificationView.context)
-                                    recyclerView.adapter = ItemAdapter(notification.products,notificationProducts,productViewModel)
+                                    recyclerView.adapter = ItemAdapter(notification.products,notificationProducts,productViewModel,false)
                                     notificationsContainer.addView(notificationView)
                                 }
 

@@ -199,5 +199,16 @@
         <item name="android:textSize">18dp</item>
         <item name="android:gravity">right</item>
     </style>
+
+    //Basket
+    <style name="empty_basket">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:background">@color/offwhite</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
 </resources>
 

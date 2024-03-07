@@ -10,7 +10,7 @@ data class ProductInfo(
 );
 data class Order (
    var buyer: String,
-   var products: List<ProductInfo>,
+   var products: MutableList<ProductInfo>,
    var date: Date,
    var status:String, // pending, accepted, denied
    var notified: Boolean

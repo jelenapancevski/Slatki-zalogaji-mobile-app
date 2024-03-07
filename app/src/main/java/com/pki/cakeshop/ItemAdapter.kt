@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -20,20 +21,21 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val products: List<Product>, private val productViewModel: ProductViewModel/*, private val images: Map<String,Bitmap>*/) :
+class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val products: List<Product>, private val productViewModel: ProductViewModel, private val isbasket:Boolean/*, private val images: Map<String,Bitmap>*/) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
        val image: ImageView
         val name: TextView
        val quantity: TextView
        val price: TextView
-       //val deletebutton: TextView
+       val deletebutton: ImageView
         init {
             // Define click listener for the ViewHolder's View
            image = view.findViewById(R.id.image)
            name = view.findViewById(R.id.name)
            quantity = view.findViewById(R.id.quantity)
            price = view.findViewById(R.id.price)
+            deletebutton = view.findViewById(R.id.deletebutton)
         }
 
         fun bind(productsinfo: ProductInfo,product:Product/*,image:Bitmap?*/) {
@@ -71,6 +73,15 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
             name.setText(product.name)
             quantity.setText(productsinfo.amount.toString())
             price.setText(product.price.toString()+" din")
+            if(isbasket){
+                deletebutton.visibility = View.VISIBLE
+                deletebutton.setOnClickListener{
+                    // delete from order
+                }
+            }
+            else {
+                deletebutton.visibility = View.INVISIBLE
+            }
         }
     }
     // Create new views (invoked by the layout manager)
