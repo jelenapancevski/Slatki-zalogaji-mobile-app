@@ -1,6 +1,8 @@
 package com.pki.cakeshop.viewmodels
 import androidx.lifecycle.ViewModel
 import com.pki.cakeshop.RetrofitClient
+import com.pki.cakeshop.models.Comment
+import com.pki.cakeshop.models.CommentData
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.repositories.ProductRepository
 import okhttp3.ResponseBody
@@ -29,8 +31,8 @@ class ProductViewModel: ViewModel() {
     }
 
     // adds comment to product given by id
-    fun comment (username:String, date: Date, callback:Callback<String>){
-        productRepository.comment(username,date,callback)
+    fun comment (comment:CommentData, callback:Callback<String>){
+        productRepository.comment(comment,callback)
     }
 
     // adds new product

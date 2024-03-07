@@ -1,5 +1,7 @@
 package com.pki.cakeshop.repositories
 
+import com.pki.cakeshop.models.Comment
+import com.pki.cakeshop.models.CommentData
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.Promotion
 import com.pki.cakeshop.models.User
@@ -33,8 +35,8 @@ class ProductRepository(private val productService:ProductService) {
 
     // adds comment to product given by id
 
-    fun comment (username:String, date: Date, callback:Callback<String>){
-        productService.comment(username,date).enqueue(callback)
+    fun comment (comment:CommentData,callback:Callback<String>){
+        productService.comment(comment).enqueue(callback)
     }
 
     // adds new product

@@ -1,5 +1,7 @@
 package com.pki.cakeshop.services
 
+import com.pki.cakeshop.models.Comment
+import com.pki.cakeshop.models.CommentData
 import com.pki.cakeshop.models.Product
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -26,9 +28,8 @@ interface ProductService {
     fun product (@Field ("id")id:String):Call<Product>
 
     // adds comment to product given by id
-    @FormUrlEncoded
     @POST("product/comment")
-   fun comment (@Field("username")username:String, @Field("date")date:Date):Call<String>
+   fun comment (@Body comment:CommentData):Call<String>
 
     // adds new product
     @FormUrlEncoded

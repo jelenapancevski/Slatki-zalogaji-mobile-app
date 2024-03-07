@@ -68,6 +68,53 @@ slatke pavlake."
         app:layout_constraintTop_toBottomOf="@id/subtitle"
         >
     </TextView>
+    <TableLayout
+        android:id="@+id/tableamount"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ingredients"
+        android:gravity="center_vertical"
+        >
+        <TableRow>
+        <TextView android:text="Količina"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            style="@style/comment_dateandtime"
+            android:layout_margin="5dp"
+            >
+
+        </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amountlayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    style="@style/input"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Količina"
+                    android:inputType="text"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:text="Dodaj u korpu"
+                style="@style/loginbutton"
+                android:layout_gravity="center">
+
+            </Button>
+        </TableRow>
+    </TableLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,16 +123,59 @@ slatke pavlake."
         style="@style/product_info_price"
         android:textAlignment="viewStart"
         android:padding="15pt"
-        app:layout_constraintTop_toBottomOf="@id/ingredients"
+        app:layout_constraintTop_toBottomOf="@id/tableamount"
         ></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/comment"
         app:layout_constraintTop_toBottomOf="@id/commentstitle"
-        />
+        tools:listitem="@layout/comment" />
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/comments"
+        android:gravity="center_horizontal"
+    >
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Ostavi komentar"
+                android:gravity="center_vertical"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newcomment"
+                    style="@style/newcomment"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLines="10"
+                   />
+            </com.google.android.material.textfield.TextInputLayout>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:text="Postavi"
+                android:id="@+id/addcomment"
+                style="@style/newcommentbtn"
+                android:layout_gravity="center_horizontal" >
+
+            </Button>
+        </TableRow>
+
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

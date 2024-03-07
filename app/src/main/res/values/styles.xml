@@ -155,6 +155,18 @@
         <item name="android:background">@color/peachy</item>
         <item name="android:gravity">left</item>
     </style>
+
+    <style name="newcomment">
+        <item name="android:fontFamily"> @font/annie</item>
+        <item name="android:textSize">20dp</item>
+        <item name="boxStrokeColor">@color/white</item>
+    </style>
+    <style name="newcommentbtn">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:fontFamily">@font/atma</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20dp</item>
+    </style>
     //Comment
     <style name="comment_username">
         <item name="android:fontFamily">@font/atma</item>

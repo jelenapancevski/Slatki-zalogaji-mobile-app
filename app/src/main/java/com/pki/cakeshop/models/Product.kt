@@ -8,6 +8,12 @@ data class Comment (
     var comment: String,
     var date:Date
 )
+
+data class CommentData (
+    var comment: Comment,
+    var id:String
+)
+
 data class Product(
  var _id:String,
  var ingridients: List<String>,
