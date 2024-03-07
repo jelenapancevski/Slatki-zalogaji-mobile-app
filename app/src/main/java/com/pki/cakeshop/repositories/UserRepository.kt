@@ -3,6 +3,7 @@ package com.pki.cakeshop.repositories
 import android.util.Log
 import com.google.gson.Gson
 import com.pki.cakeshop.models.User
+import com.pki.cakeshop.models.UserData
 import com.pki.cakeshop.services.UserService
 import okhttp3.RequestBody
 import org.bson.types.ObjectId
@@ -28,7 +29,7 @@ class UserRepository(private val userService: UserService) {
         userService.changePassword(id,newpassword).enqueue(callback)
     }
     // edit personal info
-    fun edit(user:User, callback: Callback<String>) {
+    fun edit(user:UserData, callback: Callback<String>) {
         userService.edit(user).enqueue(callback)
     }
     // get user

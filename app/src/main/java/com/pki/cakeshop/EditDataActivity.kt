@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Address
 import com.pki.cakeshop.models.User
+import com.pki.cakeshop.models.UserData
 import com.pki.cakeshop.viewmodels.UserViewModel
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -133,7 +134,7 @@ class EditDataActivity : AppCompatActivity() {
                 user.type)
 
             Log.e("USER", newuser.toString())
-            userViewModel.edit(newuser,object : Callback<String> {
+            userViewModel.edit(UserData(newuser),object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     findViewById<TextView>(R.id.message).text= newuser._id
                     // Return to profile and update user

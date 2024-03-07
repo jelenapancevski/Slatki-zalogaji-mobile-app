@@ -11,7 +11,9 @@ data class User(
     var email: String,
     var type: String // visitor, staff
 )
-
+data class UserData (
+    var user: User
+)
 data class Address(
     var street: String?,
     var number: Int?,

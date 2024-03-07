@@ -2,6 +2,7 @@ package com.pki.cakeshop.viewmodels
 import androidx.lifecycle.ViewModel
 import com.pki.cakeshop.RetrofitClient
 import com.pki.cakeshop.models.User
+import com.pki.cakeshop.models.UserData
 import com.pki.cakeshop.repositories.UserRepository
 import okhttp3.RequestBody
 import retrofit2.Callback
@@ -23,7 +24,7 @@ import retrofit2.Callback
          userRepository.changePassword(id,newpassword,callback)
      }
      // edit personal info
-     fun edit(user: User, callback: Callback<String>) {
+     fun edit(user: UserData, callback: Callback<String>) {
          userRepository.edit(user,callback)
      }
      // get user
