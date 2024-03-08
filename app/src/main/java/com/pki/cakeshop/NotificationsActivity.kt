@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Adapter
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,6 +61,8 @@ class NotificationsActivity : AppCompatActivity() {
 
                                 for (notification in notifications) {
                                     val notificationView = layoutInflater.inflate(R.layout.notification,null)
+                                    notificationView.findViewById<Button
+                                            >(R.id.purchasebutton).visibility = View.INVISIBLE
                                     val status = notificationView.findViewById<TextView>(R.id.status)
                                     val price = notificationView.findViewById<TextView>(R.id.price)
                                     val recyclerView =

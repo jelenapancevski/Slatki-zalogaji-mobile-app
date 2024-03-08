@@ -119,7 +119,6 @@ slatke pavlake."
             <TextView
                 android:layout_width="match_parent"
                 style="@style/comment_comment"
-                android:text="Ovde ide poruka"
                 android:id="@+id/message">
 
             </TextView>

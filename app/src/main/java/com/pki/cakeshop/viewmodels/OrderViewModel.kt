@@ -2,6 +2,7 @@ package com.pki.cakeshop.viewmodels
 import androidx.lifecycle.ViewModel
 import com.pki.cakeshop.RetrofitClient
 import com.pki.cakeshop.models.Order
+import com.pki.cakeshop.models.OrderData
 import com.pki.cakeshop.repositories.OrderRepository
 import retrofit2.Callback
 class OrderViewModel: ViewModel() {
@@ -12,7 +13,7 @@ class OrderViewModel: ViewModel() {
         orderRepository.orders(callback)
     }
 
-   fun add (order:Order,callback: Callback<String>){
+   fun add (order:OrderData,callback: Callback<String>){
         orderRepository.add(order,callback)
     }
     fun deny (orderid:String,callback: Callback<String>) {

@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.ViewFlipper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Order
+import com.pki.cakeshop.models.OrderData
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.ProductInfo
 import com.pki.cakeshop.models.User
+import com.pki.cakeshop.viewmodels.OrderViewModel
 import com.pki.cakeshop.viewmodels.ProductViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,21 +30,30 @@ class BasketActivity : AppCompatActivity() {
     private lateinit var user:User
     private lateinit var order:Order
     private lateinit var products:List<Product>
-    private var productViewModel: ProductViewModel = ProductViewModel()
+    private val productViewModel: ProductViewModel = ProductViewModel()
+    private val orderViewModel: OrderViewModel = OrderViewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basket)
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
         user = Gson().fromJson(pref.getString("user",null),User::class.java)
+
         if(pref.getString("order",null)==null){
             order = Order(user._id, mutableListOf(), Date(),"pending",false)
         }
         else order = Gson().fromJson(pref.getString("order",null), Order::class.java)
 
         Log.e("ORDER",order.toString())
-        if(order.products.size==0) findViewById<TextView>(R.id.empty_basket).text="Vaša korpa je prazna!"
+        val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)
+
+        if(order.products.size==0) {
+            viewFlipper.displayedChild = 0
+            findViewById<TextView>(R.id.empty_basket).text="Vaša korpa je prazna!"
+        }
         else {
+            viewFlipper.displayedChild = 1
             findViewById<TextView>(R.id.empty_basket).visibility=View.INVISIBLE
             productViewModel.get(object : Callback<List<Product>> {
                 override fun onResponse(
@@ -50,7 +63,7 @@ class BasketActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         products = response.body()!!
                         // set basket view
-                       val basket = findViewById<LinearLayout>(R.id.basket)
+                        val basket = findViewById<LinearLayout>(R.id.basket)
                         val basketView = layoutInflater.inflate(R.layout.notification, null)
                         val status = basketView.findViewById<TextView>(R.id.status)
                         val price = basketView.findViewById<TextView>(R.id.price)
@@ -66,11 +79,42 @@ class BasketActivity : AppCompatActivity() {
                         price.text =
                             "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
 
+                        basketView.findViewById<TextView>(R.id.buyer).text ="Kupac: ${user.firstname} ${user.lastname}"
+                        basketView.findViewById<TextView>(R.id.address).text ="Adresa: ${user.address.street} ${user.address.number.toString()}, ${user.address.city}"
+                        basketView.findViewById<TextView>(R.id.phone).text ="Kontakt telefon: ${user.phone} "
+
                         // Set up RecyclerView for products
 
                         recyclerView.layoutManager = LinearLayoutManager(basketView.context)
                         recyclerView.adapter = ItemAdapter(order.products, orderProducts, productViewModel,true)
                         basket.addView(basketView)
+
+                        basketView.findViewById<Button>(R.id.purchasebutton).setOnClickListener{
+                            // send order
+                            // basket is empty
+                            order.date = Date()
+                            orderViewModel.add(OrderData(order),object:Callback<String>{
+                                override fun onResponse(
+                                    call: Call<String>,
+                                    response: Response<String>
+                                ) {
+                                    if(response.isSuccessful){
+                                        Log.i("BasketActivity",response.body().toString())
+                                        // remove order
+                                        val editor = pref.edit()
+                                        editor.remove("order")
+                                        editor.apply()
+                                        viewFlipper.displayedChild = 0
+                                    }
+                                    else Log.e("BasketActivity","Failed to send order to the database")
+                                }
+
+                                override fun onFailure(call: Call<String>, t: Throwable) {
+                                    Log.e("BasketActivity","Failed to send order to the database")
+                                }
+
+                            })
+                        }
                     }
                 }
 

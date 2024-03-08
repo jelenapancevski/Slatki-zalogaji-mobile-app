@@ -3,6 +3,9 @@ package com.pki.cakeshop.models
 import org.bson.types.ObjectId
 import java.util.Date
 
+data class OrderData (
+    var order: Order
+)
 
 data class ProductInfo(
     var productid:String,

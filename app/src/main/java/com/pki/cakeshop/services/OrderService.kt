@@ -1,6 +1,7 @@
 package com.pki.cakeshop.services
 
 import com.pki.cakeshop.models.Order
+import com.pki.cakeshop.models.OrderData
 import com.pki.cakeshop.models.Product
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -17,7 +18,7 @@ interface OrderService {
     @GET("/order/orders")
     fun orders():Call<List<Order>>
     @POST("/order/add")
-    fun add(@Body order: Order):Call<String>
+    fun add(@Body order: OrderData):Call<String>
     @FormUrlEncoded
     @POST("/order/deny")
     fun deny(@Field("orderid")orderid:String):Call<String>

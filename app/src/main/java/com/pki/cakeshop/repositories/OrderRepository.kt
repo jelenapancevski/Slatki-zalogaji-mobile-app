@@ -1,6 +1,7 @@
 package com.pki.cakeshop.repositories
 
 import com.pki.cakeshop.models.Order
+import com.pki.cakeshop.models.OrderData
 import com.pki.cakeshop.services.OrderService
 import okhttp3.ResponseBody
 import retrofit2.Callback
@@ -13,7 +14,7 @@ class OrderRepository(private val orderService:OrderService) {
         orderService.orders().enqueue(callback)
     }
 
-    fun add (order:Order,callback: Callback<String>){
+    fun add (order:OrderData,callback: Callback<String>){
         orderService.add(order).enqueue(callback)
     }
     fun deny (orderid:String,callback: Callback<String>) {

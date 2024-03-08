@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                                     val editor = pref.edit()
                                     editor.putString("user", Gson().toJson(user))
                                     editor.apply()
-                                    val intent = Intent(this@MainActivity, CakesActivity::class.java)
+                                    val intent = Intent(this@MainActivity, DessertsActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else {
