@@ -74,7 +74,16 @@ class ProductActivity : AppCompatActivity() {
             }
             else order = Gson().fromJson(pref.getString("order",null),Order::class.java)
 
-            order.products.add(ProductInfo(product._id,Integer.parseInt(amount.text.toString())))
+            var found=false
+            this.order.products.forEach { prod ->
+                if (prod.productid == this.product._id) {
+                    prod.amount += Integer.parseInt(amount.text.toString());
+                    found = true;
+                }
+            }
+            if(!found){
+                order.products.add(ProductInfo(product._id,Integer.parseInt(amount.text.toString())))            }
+
 
             Log.e("ORDER",order.toString())
             findViewById<TextView>(R.id.message).text="Proizvod je uspešno dodat u korpu!"
