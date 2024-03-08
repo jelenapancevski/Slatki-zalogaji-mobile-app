@@ -11,6 +11,7 @@ import android.widget.Adapter
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.ViewFlipper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -59,10 +60,19 @@ class NotificationsActivity : AppCompatActivity() {
 
                                 notificationsContainer = findViewById<LinearLayout>(R.id.notifications)
 
+                                val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)
+                                if(notifications.size>0){
+                                    viewFlipper.displayedChild = 1
+                                }
+                                else {
+                                    viewFlipper.displayedChild = 0
+                                    findViewById<TextView>(R.id.empty_notifications).text="Nemate novih obaveštenja!"
+                                }
                                 for (notification in notifications) {
                                     val notificationView = layoutInflater.inflate(R.layout.notification,null)
-                                    notificationView.findViewById<Button
-                                            >(R.id.purchasebutton).visibility = View.INVISIBLE
+                                    notificationView.findViewById<Button>(R.id.purchasebutton).visibility = View.INVISIBLE
+                                    notificationView.findViewById<TextView>(R.id.delivery).visibility = View.INVISIBLE
+
                                     val status = notificationView.findViewById<TextView>(R.id.status)
                                     val price = notificationView.findViewById<TextView>(R.id.price)
                                     val recyclerView =
@@ -80,7 +90,7 @@ class NotificationsActivity : AppCompatActivity() {
 
 
 
-                                    var notificationProducts: List<Product> = getProducts(notification.products)
+                                    var notificationProducts: MutableList<Product> = getProducts(notification.products)
 
                                     price.text = "Ukupna cena: "+ calculatePrice(notificationProducts,notification.products)+" rsd"
 

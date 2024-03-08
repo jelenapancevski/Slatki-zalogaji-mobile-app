@@ -3,6 +3,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.pki.cakeshop.models.Order
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.ProductInfo
+import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.ProductViewModel
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -21,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val products: List<Product>, private val productViewModel: ProductViewModel, private val isbasket:Boolean/*, private val images: Map<String,Bitmap>*/) :
+class ItemAdapter ( private val productsinfo: MutableList<ProductInfo>,private val products: MutableList<Product>, private val productViewModel: ProductViewModel, private val isbasket:Boolean, private val onItemClick: ((Int) -> Unit)? = null) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
        val image: ImageView
@@ -29,6 +32,7 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
        val quantity: TextView
        val price: TextView
        val deletebutton: ImageView
+
         init {
             // Define click listener for the ViewHolder's View
            image = view.findViewById(R.id.image)
@@ -38,10 +42,7 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
             deletebutton = view.findViewById(R.id.deletebutton)
         }
 
-        fun bind(productsinfo: ProductInfo,product:Product/*,image:Bitmap?*/) {
-            /*image?.let { img->
-               this.image.setImageBitmap(img)
-            }*/
+        fun bind(productinfo: ProductInfo,product:Product) {
             productViewModel.getImage(
                 product._id + "." + product.image,
                 object : Callback<ResponseBody> {
@@ -57,6 +58,9 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
                                 if (byteArray != null) {
                                     val bitmap =
                                         BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                                    if (image.drawable != null) {
+                                        (image.drawable as BitmapDrawable).bitmap.recycle() // Recycle previous bitmap
+                                    }
                                     image.setImageBitmap(bitmap)
                                 }
                             } catch (e: IOException) {
@@ -71,12 +75,20 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
 
                 })
             name.setText(product.name)
-            quantity.setText(productsinfo.amount.toString())
+            quantity.setText(productinfo.amount.toString())
             price.setText(product.price.toString()+" din")
             if(isbasket){
                 deletebutton.visibility = View.VISIBLE
                 deletebutton.setOnClickListener{
                     // delete from order
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        products.removeAt(position)
+                        productsinfo.removeAt(position)
+                        onItemClick?.let { it1 -> it1(position) }
+                        notifyItemRemoved(position)
+                    }
+
                 }
             }
             else {
@@ -95,8 +107,7 @@ class ItemAdapter ( private val productsinfo: List<ProductInfo>,private val prod
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         val productinfo = productsinfo[position]
         val product = products[position]
-        //val image = images[product._id+"."+product.image]
-        viewHolder.bind(productinfo,product/*,image*/)
+        viewHolder.bind(productinfo,product)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

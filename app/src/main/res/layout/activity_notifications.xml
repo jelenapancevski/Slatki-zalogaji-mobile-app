@@ -7,6 +7,18 @@
     tools:context=".NotificationsActivity"
     android:background="@drawable/basketbackground"
     >
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/empty_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/empty_basket"
+            android:layout_marginTop="16dp"></TextView>
+
     <LinearLayout
         android:id="@+id/notifications"
         android:layout_width="match_parent"
@@ -18,4 +30,5 @@
 
         <!-- This container will hold multiple notification layouts -->
     </LinearLayout>
+    </ViewFlipper>
 </RelativeLayout>

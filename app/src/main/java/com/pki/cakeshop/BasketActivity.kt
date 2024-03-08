@@ -74,7 +74,7 @@ class BasketActivity : AppCompatActivity() {
                         status.text = "Porudžbina " + formatDate(order.date)
 
 
-                        var orderProducts: List<Product> = getProducts(order.products)
+                        var orderProducts: MutableList<Product> = getProducts(order.products)
 
                         price.text =
                             "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
@@ -86,7 +86,22 @@ class BasketActivity : AppCompatActivity() {
                         // Set up RecyclerView for products
 
                         recyclerView.layoutManager = LinearLayoutManager(basketView.context)
-                        recyclerView.adapter = ItemAdapter(order.products, orderProducts, productViewModel,true)
+                        recyclerView.adapter = ItemAdapter(order.products, orderProducts, productViewModel,true){
+                            position->
+                            val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
+                            val editor = pref.edit()
+                            editor.putString("order", Gson().toJson(order))
+                            editor.apply()
+                            if(order.products.size>0)
+                            price.text =
+                                "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
+                            else {
+                                viewFlipper.displayedChild = 0
+                                findViewById<TextView>(R.id.empty_basket).text="Vaša korpa je prazna!"
+                            }
+
+                        }
+
                         basket.addView(basketView)
 
                         basketView.findViewById<Button>(R.id.purchasebutton).setOnClickListener{
