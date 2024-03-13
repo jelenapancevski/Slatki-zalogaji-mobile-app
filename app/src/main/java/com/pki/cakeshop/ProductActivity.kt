@@ -2,7 +2,6 @@ package com.pki.cakeshop
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -25,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.Date
 
-class ProductActivity : AppCompatActivity() {
+class ProductActivity : MenuActivity() {
     private lateinit var  userViewModel:UserViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var product: Product
@@ -60,6 +59,7 @@ class ProductActivity : AppCompatActivity() {
             ingredients+=ingredient+"\n"
         }
         findViewById<TextView>(R.id.ingredients).text=ingredients
+        product.comments = product.comments.sortedByDescending { it.date }.toMutableList()
         commentAdapter = CommentAdapter(product.comments,userViewModel)
         commentsView.adapter=commentAdapter
 
@@ -106,8 +106,16 @@ class ProductActivity : AppCompatActivity() {
             val comment : Comment = Comment(user._id,newcomment.text.toString(), Date())
             productViewModel.comment(CommentData(comment,product._id),object:Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    TODO("Not yet implemented")
-                    //reload comments
+                    if(response.isSuccessful && response.body().equals("Added comment")){
+                        newcomment.setText("")
+                        product.comments.add(0,comment)
+                        commentAdapter.notifyItemInserted(0)
+                        // update list of products
+                        /*val returnIntent = Intent()
+                        returnIntent.putExtra("updatedProduct", Gson().toJson(product))
+                        setResult(Activity.RESULT_OK, returnIntent)
+                        finish()*/
+                    }
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {

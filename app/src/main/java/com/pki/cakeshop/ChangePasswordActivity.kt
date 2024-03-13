@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChangePasswordActivity : AppCompatActivity() {
+class ChangePasswordActivity : MenuActivity() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var users: List<User>
     // Function to check for at least one uppercase letter

@@ -1,7 +1,6 @@
 package com.pki.cakeshop
 
 import android.graphics.BitmapFactory
-import android.renderscript.ScriptGroup.Input
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import retrofit2.Response
 import java.io.IOException
 
 
-class PromotionAdapter (private val promotions: List<Promotion>) :
+class PromotionAdapter (private val promotions: List<Promotion>, private val layout:Int) :
     RecyclerView.Adapter<PromotionAdapter.PromotionViewHolder>() {
     class PromotionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView
@@ -60,7 +59,7 @@ class PromotionAdapter (private val promotions: List<Promotion>) :
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): PromotionViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.promotion, viewGroup, false)
+            .inflate(layout, viewGroup, false)
         return PromotionViewHolder(view)
     }
 

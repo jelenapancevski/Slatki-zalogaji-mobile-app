@@ -29,13 +29,13 @@
                 android:id="@+id/changepassword"
                 style="@style/profile_buttons"
                 android:text="Promeni lozinku"
-                android:textAlignment="center"></Button>
+                android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/editdata"
                 style="@style/profile_buttons"
                 android:text="Izmeni detalje"
-                android:textAlignment="center"></Button>
+                android:textAlignment="center"/>
         </TableRow>
 
         <TableRow
@@ -113,11 +113,11 @@
 
             <TextView
                 style="@style/profile_row"
-                android:text="Kontakt telefon:"></TextView>
+                android:text="Kontakt telefon:"/>
             <TextView
                 style="@style/profile_row"
                 android:id="@+id/phone"
-                ></TextView>
+                />
 
         </TableRow>
         <TableRow
@@ -126,11 +126,11 @@
             >
             <TextView
                 style="@style/profile_row"
-                android:text="Email adresa:"></TextView>
+                android:text="Email adresa:" />
             <TextView
                 style="@style/profile_row"
                 android:id="@+id/email"
-                ></TextView>
+                />
 
 
         </TableRow>

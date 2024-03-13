@@ -3,38 +3,58 @@
 
     >
     <item
+        android:visible="true"
         android:id="@+id/action_products"
         android:title="Proizvodi"
-        android:theme="@style/menu_option"
-        />
+        >
+        <menu>
+            <item
+                android:id="@+id/action_cakes"
+                android:title="Torte" />
+            <item
+                android:id="@+id/action_desserts"
+                android:title="Kolači" />
+        </menu>
+    </item>
 
     <item
+        android:visible="true"
         android:id="@+id/action_promotions"
         android:title="Promocije"
         />
     <item
+        android:visible="true"
         android:id="@+id/action_contact"
-        android:title="Kontakt" >
+        android:title="Kontakt"
+        >
 
     </item>
     <item
+        android:visible="true"
         android:id="@+id/action_basket"
-        android:title="Korpa" >
+        android:title="Korpa"
+        >
 
     </item>
     <item
+        android:visible="true"
         android:id="@+id/action_notifications"
-        android:title="Obavestenja" >
+        android:title="Obaveštenja"
+       >
 
     </item>
     <item
+        android:visible="true"
         android:id="@+id/action_profile"
-        android:title="Profil" >
+        android:title="Profil"
+        >
 
     </item>
     <item
+        android:visible="true"
         android:id="@+id/action_logout"
-        android:title="Odjavi se" >
+        android:title="Odjavi se"
+        >
 
     </item>
 </menu>

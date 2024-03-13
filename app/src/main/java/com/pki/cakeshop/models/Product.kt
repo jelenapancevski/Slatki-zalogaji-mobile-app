@@ -22,5 +22,5 @@ data class Product(
  var type: String,
  var image: String,
  var price:Int,
- var comments: List <Comment>
+ var comments: MutableList <Comment>
 )

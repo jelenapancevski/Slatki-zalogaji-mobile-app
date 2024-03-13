@@ -2,19 +2,15 @@ package com.pki.cakeshop
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pki.cakeshop.models.Promotion
 import com.pki.cakeshop.viewmodels.PromotionViewModel
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStream
 
-
-class PromotionsActivity : AppCompatActivity() {
+class PromotionsActivity : MenuActivity() {
     private lateinit var promotionViewModel: PromotionViewModel
     private lateinit var promotions: List<Promotion>
     private lateinit var recyclerView: RecyclerView
@@ -34,8 +30,8 @@ class PromotionsActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     promotions = response.body()!!
-                    adapter = PromotionAdapter(promotions);
-                    recyclerView.setAdapter(adapter);
+                    adapter = PromotionAdapter(promotions,R.layout.promotion);
+                    recyclerView.adapter=adapter
 
                 } else {
                     // Handle the case where the request was not successful

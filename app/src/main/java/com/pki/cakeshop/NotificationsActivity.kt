@@ -1,13 +1,9 @@
 package com.pki.cakeshop
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,16 +17,14 @@ import com.pki.cakeshop.models.ProductInfo
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.OrderViewModel
 import com.pki.cakeshop.viewmodels.ProductViewModel
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class NotificationsActivity : AppCompatActivity() {
+class NotificationsActivity : MenuActivity() {
     private lateinit var notificationsContainer: LinearLayout
     private lateinit var orderViewModel: OrderViewModel
     private lateinit var notifications: List<Order>

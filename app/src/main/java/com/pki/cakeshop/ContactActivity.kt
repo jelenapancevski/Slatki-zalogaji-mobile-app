@@ -8,7 +8,7 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 
 
-class ContactActivity: AppCompatActivity() {
+class ContactActivity: MenuActivity() {
 
     private lateinit var map: WebView;
 

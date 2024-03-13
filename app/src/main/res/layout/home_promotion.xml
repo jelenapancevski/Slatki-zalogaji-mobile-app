@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/promotion_title"
+            style="@style/home_promotion_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Dan kolačića!"
+            />
+
+    <ImageView
+        android:id="@+id/promotion_image"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop" />
+
+    <TextView
+            android:id="@+id/promotion_text"
+            style="@style/home_promotion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:text="Povodom internacionalnog dana kolačića 15.
+decembra poslastičarnica Slatki zaglodaji darovaće
+svoje kupce kolačićem po želji. Čekamo vas na
+poznatoj lokaciji, da zajedno proslavimo ovaj dan!"
+            />
+    </LinearLayout>
+
+
+

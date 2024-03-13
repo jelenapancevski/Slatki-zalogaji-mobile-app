@@ -1,7 +1,6 @@
 package com.pki.cakeshop
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,7 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class BasketActivity : AppCompatActivity() {
+class BasketActivity : MenuActivity() {
     private lateinit var user:User
     private lateinit var order:Order
     private lateinit var products:List<Product>

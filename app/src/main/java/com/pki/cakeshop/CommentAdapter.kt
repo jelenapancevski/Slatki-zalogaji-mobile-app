@@ -18,8 +18,8 @@ import java.util.Locale
 class CommentAdapter (private val comments: List<Comment>, private val userViewModel:UserViewModel) :
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
     fun formatDate(date: Date): String {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        return sdf.format(date)
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        return sdf.format(date)+"h"
     }
    inner class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val username: TextView

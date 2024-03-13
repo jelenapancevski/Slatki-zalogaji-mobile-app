@@ -2,21 +2,14 @@ package com.pki.cakeshop
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.UserViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : MenuActivity() {
     private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

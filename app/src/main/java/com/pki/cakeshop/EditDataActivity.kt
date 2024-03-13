@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditDataActivity : AppCompatActivity() {
+class EditDataActivity : MenuActivity() {
     private lateinit var user: User
     private lateinit var users: List<User>
     private lateinit var userViewModel: UserViewModel

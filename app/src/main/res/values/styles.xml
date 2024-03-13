@@ -210,5 +210,33 @@
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">20dp</item>
     </style>
+
+
+    // homepage
+    <style name="home_promotion">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/offwhite</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:background">@color/antiquebrass</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="home_promotion_title">
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/offwhite</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:background">@color/antiquebrass</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Set your desired padding value -->
+        <item name="android:fontFamily">@font/annie</item>
+        <item name="android:textColor">@color/offwhite</item>
+        <item name="android:background">@color/pink</item>
+        <item name="android:textSize">35dp</item>
+
+    </style>
+
 </resources>
 
