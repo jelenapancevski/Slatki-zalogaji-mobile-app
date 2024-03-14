@@ -3,12 +3,9 @@ package com.pki.cakeshop
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.PopupMenu
 
 open class MenuActivity : AppCompatActivity() {
 
@@ -26,7 +23,7 @@ open class MenuActivity : AppCompatActivity() {
             }*/
             R.id.action_cakes -> {
                 val intent = Intent(this,
-                    CakesActivity::class.java).apply {
+                    ProductsActivity::class.java).apply {
                         putExtra("type", "torta")
                 }
                 startActivity(intent)
@@ -34,7 +31,7 @@ open class MenuActivity : AppCompatActivity() {
             }
             R.id.action_desserts -> {
                 val intent = Intent(this,
-                    CakesActivity::class.java).apply {
+                    ProductsActivity::class.java).apply {
                     putExtra("type", "kolač")
                 }
                 startActivity(intent)

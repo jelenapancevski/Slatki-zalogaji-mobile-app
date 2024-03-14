@@ -50,22 +50,26 @@ class NotificationsActivity : MenuActivity() {
                         override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                             if (response.isSuccessful) {
                                 notifications = response.body()!!
-                                Log.e("NOTIFIKACIJE",notifications.toString())
-
                                 notificationsContainer = findViewById<LinearLayout>(R.id.notifications)
 
                                 val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)
                                 if(notifications.size>0){
                                     viewFlipper.displayedChild = 1
+                                    findViewById<TextView>(R.id.empty_notifications).visibility = View.GONE
                                 }
                                 else {
                                     viewFlipper.displayedChild = 0
                                     findViewById<TextView>(R.id.empty_notifications).text="Nemate novih obaveštenja!"
+                                    notificationsContainer.visibility = View.GONE
+
                                 }
                                 for (notification in notifications) {
                                     val notificationView = layoutInflater.inflate(R.layout.notification,null)
-                                    notificationView.findViewById<Button>(R.id.purchasebutton).visibility = View.INVISIBLE
-                                    notificationView.findViewById<TextView>(R.id.delivery).visibility = View.INVISIBLE
+                                    notificationView.findViewById<TextView>(R.id.buyer).visibility = View.GONE
+                                    notificationView.findViewById<TextView>(R.id.address).visibility = View.GONE
+                                    notificationView.findViewById<TextView>(R.id.phone).visibility = View.GONE
+                                    notificationView.findViewById<Button>(R.id.purchasebutton).visibility = View.GONE
+                                    notificationView.findViewById<TextView>(R.id.delivery).visibility = View.GONE
 
                                     val status = notificationView.findViewById<TextView>(R.id.status)
                                     val price = notificationView.findViewById<TextView>(R.id.price)

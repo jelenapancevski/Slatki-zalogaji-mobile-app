@@ -70,7 +70,7 @@ class ProductActivity : MenuActivity() {
 
             }
             if(pref.getString("order",null)==null){
-                order = Order(user._id, mutableListOf(),Date(),"pending",false)
+                order = Order(user._id, mutableListOf(),Date(),"pending",null)
             }
             else order = Gson().fromJson(pref.getString("order",null),Order::class.java)
 

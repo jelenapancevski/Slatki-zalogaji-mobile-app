@@ -53,45 +53,34 @@
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginBottom"> 10dp</item>
-    </style>
-
-    // Menu
-
-    <style name="menu_option">
-        <item name="android:fontFamily">@font/annie</item>
-        <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:layout_gravity">center</item>
     </style>
 
     // Promotions
     <style name="promotion_header_title">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
     </style>
     <style name="promotion_text">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
     </style>
     // Products
     <style name="product_name">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
     </style>
     <style name="cakes_title">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/pink</item>
-        <item name="android:textSize">40dp</item>
+        <item name="android:textSize">45sp</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -229,14 +218,18 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Set your desired padding value -->
-        <item name="android:fontFamily">@font/annie</item>
-        <item name="android:textColor">@color/offwhite</item>
-        <item name="android:background">@color/pink</item>
-        <item name="android:textSize">35dp</item>
 
+    <style name="LoginTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/offwhite</item>
     </style>
 
+    // Menu
+
+    <style name="menu_option">
+        <item name="backgroundColor">@color/pink</item>
+        <item name="android:textColor">@color/offwhite</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:fontFamily">@font/annie</item>
+    </style>
 </resources>
 

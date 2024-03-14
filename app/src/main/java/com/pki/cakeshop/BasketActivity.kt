@@ -49,7 +49,7 @@ class BasketActivity : MenuActivity() {
 
         if(order.products.size==0) {
             viewFlipper.displayedChild = 0
-            findViewById<TextView>(R.id.empty_basket).text="Vaša korpa je prazna!"
+            findViewById<TextView>(R.id.empty_basket).text=getString(R.string.empty_basket_message)
         }
         else {
             viewFlipper.displayedChild = 1
@@ -96,7 +96,7 @@ class BasketActivity : MenuActivity() {
                                 "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
                             else {
                                 viewFlipper.displayedChild = 0
-                                findViewById<TextView>(R.id.empty_basket).text="Vaša korpa je prazna!"
+                                findViewById<TextView>(R.id.empty_basket).text=getString(R.string.empty_basket_message)
                             }
 
                         }

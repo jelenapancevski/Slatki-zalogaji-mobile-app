@@ -11,6 +11,19 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="empty_basket_message">Vaša korpa je prazna!</string>
+    <string name="address">Bulevar kralja Aleksandra 198,
+        Beograd 11000</string>
+    <string name="email">slatkizalogaji@gmail.com</string>
+    <string name="phone">+38162859754</string>
+    <string name="contact_info">Kontakt informacije</string>
+    <string name="sunday_hours">ne radimo</string>
+    <string name="sunday">Nedelja</string>
+    <string name="saturaday_hours">10:00h - 18:00h</string>
+    <string name="saturday">Subota</string>
+    <string name="monday_friday_hours">09:00h - 20:00h</string>
+    <string name="monday_friday">Ponedeljak - Petak</string>
+    <string name="working_hours">Radno vreme</string>
 
 
 </resources>

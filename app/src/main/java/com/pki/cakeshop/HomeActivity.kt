@@ -1,26 +1,9 @@
 package com.pki.cakeshop
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.constraintlayout.helper.widget.Carousel
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.models.Promotion
 import retrofit2.Call
 import com.pki.cakeshop.viewmodels.PromotionViewModel

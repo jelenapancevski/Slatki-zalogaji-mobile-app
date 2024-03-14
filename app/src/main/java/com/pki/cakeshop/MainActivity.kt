@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                                 else {
                                     message.text="Uneti kredencijali nisu validni"
                                 }
-                                message.text=user.username;
+                                message.text="Prijava je uspešna!"
                             } else {
                                 message.text="Uneti kredencijali nisu validni"
                             }

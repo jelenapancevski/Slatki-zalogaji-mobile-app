@@ -1,11 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Cakeshop" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Cakeshop" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/offwhite</item>
+        <item name="actionBarTheme">@style/My.Actionbar</item>
+
     </style>
 
     <style name="Theme.Cakeshop" parent="Base.Theme.Cakeshop">
-
     </style>
+    <style name="My.Actionbar" parent="Theme.AppCompat.DayNight.DarkActionBar" >
+
+        <item name="colorPrimary">@color/pink</item>
+        <item name="fontFamily">@font/annie</item>
+        <item name="android:textColorPrimary">@color/offwhite</item>
+        <item name="android:textColor">@color/offwhite</item>
+        <item name="android:background">@color/pink</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
 </resources>

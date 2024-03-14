@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/empty_basket"
-            android:text="Vaša korpa je prazna!"
+            android:text="@string/empty_basket_message"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
             >

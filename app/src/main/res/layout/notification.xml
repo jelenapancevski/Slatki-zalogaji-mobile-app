@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.google.android.material.card.MaterialCardView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
     app:strokeColor="#FFFF"
     app:cardBackgroundColor="#FFFF"
     >
@@ -31,11 +32,11 @@
             />
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical">
                 <TextView
                     style="@style/order_text"
@@ -47,7 +48,7 @@
                 <TextView
                     style="@style/order_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
 
                     android:text="Količina"
                     android:layout_weight="1"
@@ -55,14 +56,14 @@
                 <TextView
                     style="@style/order_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Cena"
                     android:layout_weight="1"
                     />
                 <TextView
                     style="@style/order_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text=""
                     android:layout_weight="1"
                     />
@@ -74,9 +75,9 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:paddingTop="10dp"
-            tools:listitem="@layout/item" />
+            tools:listitem="@layout/item"
+            />
 
         <View
             android:layout_width="match_parent"
@@ -87,8 +88,8 @@
             style="@style/order_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
             android:text="Ukupna cena: 5000 din"
+            android:paddingEnd="20dp"
             />
         <TextView
             android:id="@+id/delivery"
@@ -137,7 +138,7 @@
             <TableRow
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 >
                 <Button
                     android:text="Potvrdi porudžbinu"
@@ -150,6 +151,5 @@
         </TableLayout>
 
     </LinearLayout>
-
 
 </com.google.android.material.card.MaterialCardView>
