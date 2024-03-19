@@ -23,12 +23,12 @@ class CommentAdapter (private val comments: List<Comment>, private val userViewM
     }
    inner class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val username: TextView
-        private val dateandtime:TextView
+        private val dateAndTime:TextView
         private val comment:TextView
         init {
             // Define click listener for the ViewHolder's View
             username = view.findViewById(R.id.username)
-            dateandtime = view.findViewById(R.id.dateandtime)
+            dateAndTime = view.findViewById(R.id.dateandtime)
             comment = view.findViewById(R.id.comment)
         }
 
@@ -36,7 +36,7 @@ class CommentAdapter (private val comments: List<Comment>, private val userViewM
             userViewModel.user(comment.username,object: Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if(response.isSuccessful){
-                        username.setText(response.body()?.username!!)
+                        username.text = response.body()?.username!!
                         // commentAdapter.notifyDataSetChanged()
                     }
                 }
@@ -46,8 +46,8 @@ class CommentAdapter (private val comments: List<Comment>, private val userViewM
 
             })
             //this.username.setText(username)
-            this.dateandtime.setText(formatDate(comment.date))
-            this.comment.setText(comment.comment)
+            this.dateAndTime.text = (formatDate(comment.date))
+            this.comment.text = comment.comment
         }
     }
     // Create new views (invoked by the layout manager)

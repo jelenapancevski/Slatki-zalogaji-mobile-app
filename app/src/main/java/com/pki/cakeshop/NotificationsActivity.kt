@@ -37,10 +37,13 @@ class NotificationsActivity : MenuActivity() {
         orderViewModel = OrderViewModel()
         productViewModel = ProductViewModel()
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
-        user = Gson().fromJson(pref.getString("user",null), User::class.java)
-        if(user==null){
+        if(pref.getString("user",null)==null){
             //error
+            Log.e("NotificationsActivity", "Error user is null")
+            return
         }
+        user = Gson().fromJson(pref.getString("user",null), User::class.java)
+
         productViewModel.get(object : Callback<List<Product>> {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 if (response.isSuccessful) {
@@ -50,16 +53,16 @@ class NotificationsActivity : MenuActivity() {
                         override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                             if (response.isSuccessful) {
                                 notifications = response.body()!!
-                                notificationsContainer = findViewById<LinearLayout>(R.id.notifications)
+                                notificationsContainer = findViewById(R.id.notifications)
 
                                 val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)
-                                if(notifications.size>0){
+                                if(notifications.isNotEmpty()){
                                     viewFlipper.displayedChild = 1
                                     findViewById<TextView>(R.id.empty_notifications).visibility = View.GONE
                                 }
                                 else {
                                     viewFlipper.displayedChild = 0
-                                    findViewById<TextView>(R.id.empty_notifications).text="Nemate novih obaveštenja!"
+                                    findViewById<TextView>(R.id.empty_notifications).text = getString(R.string.no_new_notifications)
                                     notificationsContainer.visibility = View.GONE
 
                                 }
@@ -78,24 +81,18 @@ class NotificationsActivity : MenuActivity() {
 
                                     // Set status and total amount for the notification
                                     if (notification.status == "accepted") {
-                                        status.text =
-                                            "Vaša porudžbina kreirana " + formatDate(notification.date) + " je prihvaćena."
+                                        status.text = getString(R.string.status_accepted,formatDate(notification.date))
 
                                     } else if (notification.status == "denied") {
-                                        status.text =
-                                            "Vaša porudžbina kreirana " + formatDate(notification.date) + " je odbijena."
+                                        status.text = getString(R.string.status_denied,formatDate(notification.date))
                                     }
 
 
 
-                                    var notificationProducts: MutableList<Product> = getProducts(notification.products)
+                                    val notificationProducts: MutableList<Product> = getProducts(notification.products)
 
-                                    price.text = "Ukupna cena: "+ calculatePrice(notificationProducts,notification.products)+" rsd"
+                                    price.text = getString(R.string.total_price,calculatePrice(notificationProducts,notification.products).toString())
 
-                                    // Set up RecyclerView for products
-                                    Log.e("InfoProdukti", notification.products.toString())
-                                    Log.e("Produkti", notificationProducts.toString())
-                                    Log.e("ProductViewModel",productViewModel.toString())
 
                                     recyclerView.layoutManager = LinearLayoutManager(notificationView.context)
                                     recyclerView.adapter = ItemAdapter(notification.products,notificationProducts,productViewModel,false)
@@ -105,7 +102,6 @@ class NotificationsActivity : MenuActivity() {
                             } else {
                                 // Handle the case where the request was not successful
                                 Log.e("NotificationsActivity", "Request failed: ${response.code()}")
-                                //Log.e("ERRROR", "" + call.req
                             }
                         }
 
@@ -129,26 +125,26 @@ class NotificationsActivity : MenuActivity() {
 
     }
 
-    private fun calculatePrice(products: List<Product>, productsinfo: List<ProductInfo>): Any? {
+    private fun calculatePrice(products: List<Product>, productsInfo: List<ProductInfo>): Int {
         var index=0
         var totalPrice=0
         products.forEach { product->
-            totalPrice+= product.price*productsinfo[index].amount
+            totalPrice+= product.price*productsInfo[index].amount
             index++
         }
         return totalPrice
     }
 
     private fun getProducts(productsInfo:List<ProductInfo>):MutableList<Product>{
-        val product_list:MutableList<Product> = mutableListOf()
+        val productList:MutableList<Product> = mutableListOf()
         productsInfo.forEach { pi->
-            products?.forEach{ product->
+            products.forEach{ product->
                 if(product._id==pi.productid){
-                    product_list.add(product)
+                    productList.add(product)
                 }
             }
         }
-        return product_list
+        return productList
     }
     fun formatDate(date: Date): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/scroll">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Svarcvald"
         android:id="@+id/name"
         style="@style/product_info_name"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,21 +30,17 @@
         app:layout_constraintTop_toBottomOf="@id/name">
     </ImageView>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/description"
-        style="@style/product_info_description"
-
-        android:text="Ova Švarcvald torta kombinuje bogate slojeve čokoladne torte sa
-svežim višnjama, likerom od trešanja i jednostavnom glazurom od
-slatke pavlake."
         app:layout_constraintTop_toBottomOf="@id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/product_info_description"
         >
     </TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cena"
+        android:text="@string/price"
         android:id="@+id/price"
         style="@style/product_info_price"
         app:layout_constraintTop_toBottomOf="@id/description"
@@ -53,7 +49,7 @@ slatke pavlake."
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sastojci"
+        android:text="@string/ingredients"
         android:id="@+id/subtitle"
         style="@style/product_info_subtitle"
         app:layout_constraintTop_toBottomOf="@id/price"
@@ -63,22 +59,25 @@ slatke pavlake."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ingredients"
-        android:paddingLeft="10pt"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         style="@style/product_info_ingredients"
         app:layout_constraintTop_toBottomOf="@id/subtitle"
         >
     </TextView>
     <TableLayout
         android:id="@+id/tableamount"
-
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ingredients"
         android:gravity="center_vertical"
         >
         <TableRow>
-        <TextView android:text="Količina"
+        <TextView android:text="@string/quantity"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
             android:layout_gravity="center"
             style="@style/comment_dateandtime"
             android:layout_margin="5dp"
@@ -99,7 +98,7 @@ slatke pavlake."
                     style="@style/input"
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
-                    android:hint="Količina"
+                    android:hint="@string/quantity"
                     android:inputType="number"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
@@ -107,7 +106,7 @@ slatke pavlake."
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <Button
-                android:text="Dodaj u korpu"
+                android:text="@string/add_to_basket"
                 android:id="@+id/addtobasket"
                 style="@style/loginbutton"
                 android:layout_gravity="center">
@@ -128,13 +127,13 @@ slatke pavlake."
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Komentari"
+        android:text="@string/comments"
         android:id="@+id/commentstitle"
         style="@style/product_info_price"
         android:textAlignment="viewStart"
-        android:padding="15pt"
+        android:padding="15dp"
         app:layout_constraintTop_toBottomOf="@id/tableamount"
-        ></TextView>
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comments"
@@ -157,7 +156,7 @@ slatke pavlake."
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="Ostavi komentar"
+                android:hint="@string/leave_a_comment"
                 android:gravity="center_vertical"
                 >
 
@@ -170,6 +169,7 @@ slatke pavlake."
                     android:inputType="textMultiLine"
                     android:lines="3"
                     android:maxLines="10"
+                    android:gravity="top|start"
                    />
             </com.google.android.material.textfield.TextInputLayout>
         </TableRow>
@@ -178,7 +178,7 @@ slatke pavlake."
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:text="Postavi"
+                android:text="@string/post"
                 android:id="@+id/addcomment"
                 style="@style/newcommentbtn"
                 android:layout_gravity="center_horizontal" >

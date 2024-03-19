@@ -1,7 +1,6 @@
 package com.pki.cakeshop.repositories
 
 import com.pki.cakeshop.models.Promotion
-import com.pki.cakeshop.models.User
 import com.pki.cakeshop.services.PromotionService
 import okhttp3.ResponseBody
 import retrofit2.Callback

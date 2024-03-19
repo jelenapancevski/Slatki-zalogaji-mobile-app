@@ -1,6 +1,5 @@
 package com.pki.cakeshop.models
 
-import org.bson.types.ObjectId
 import java.util.Date
 
 data class Comment (

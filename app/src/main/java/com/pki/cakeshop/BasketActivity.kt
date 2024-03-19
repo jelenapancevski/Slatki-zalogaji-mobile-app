@@ -70,17 +70,14 @@ class BasketActivity : MenuActivity() {
                             basketView.findViewById<RecyclerView>(R.id.recycler_view)
 
                         // set status/header and total amount of basket
-                        status.text = "Porudžbina " + formatDate(order.date)
+                        status.text = getString(R.string.purchase_date, formatDate(order.date))
 
+                        val orderProducts: MutableList<Product> = getProducts(order.products)
 
-                        var orderProducts: MutableList<Product> = getProducts(order.products)
-
-                        price.text =
-                            "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
-
-                        basketView.findViewById<TextView>(R.id.buyer).text ="Kupac: ${user.firstname} ${user.lastname}"
-                        basketView.findViewById<TextView>(R.id.address).text ="Adresa: ${user.address.street} ${user.address.number.toString()}, ${user.address.city}"
-                        basketView.findViewById<TextView>(R.id.phone).text ="Kontakt telefon: ${user.phone} "
+                        price.text = getString(R.string.total_price, calculatePrice(orderProducts, order.products).toString())
+                        basketView.findViewById<TextView>(R.id.buyer).text = getString(R.string.buyer,user.firstname,user.lastname)
+                        basketView.findViewById<TextView>(R.id.address).text = getString(R.string.buyer_address,user.address.street,user.address.number.toString(),user.address.city)
+                        basketView.findViewById<TextView>(R.id.phone).text = getString(R.string.buyer_phone,user.phone)
 
                         // Set up RecyclerView for products
 
@@ -93,7 +90,7 @@ class BasketActivity : MenuActivity() {
                             editor.apply()
                             if(order.products.size>0)
                             price.text =
-                                "Ukupna cena: " + calculatePrice(orderProducts, order.products) + " rsd"
+                                getString(R.string.total_price, calculatePrice(orderProducts, order.products).toString())
                             else {
                                 viewFlipper.displayedChild = 0
                                 findViewById<TextView>(R.id.empty_basket).text=getString(R.string.empty_basket_message)
@@ -140,26 +137,26 @@ class BasketActivity : MenuActivity() {
         }
 
     }
-    private fun calculatePrice(products: List<Product>, productsinfo: List<ProductInfo>): Any? {
+    private fun calculatePrice(products: List<Product>, productsInfo: List<ProductInfo>): Int {
         var index=0
         var totalPrice=0
         products.forEach { product->
-            totalPrice+= product.price*productsinfo[index].amount
+            totalPrice+= product.price*productsInfo[index].amount
             index++
         }
         return totalPrice
     }
 
     private fun getProducts(productsInfo:List<ProductInfo>):MutableList<Product>{
-        val product_list:MutableList<Product> = mutableListOf()
+        val productList:MutableList<Product> = mutableListOf()
         productsInfo.forEach { pi->
-            products?.forEach{ product->
+            products.forEach{ product->
                 if(product._id==pi.productid){
-                    product_list.add(product)
+                    productList.add(product)
                 }
             }
         }
-        return product_list
+        return productList
     }
     fun formatDate(date: Date): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

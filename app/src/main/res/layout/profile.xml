@@ -16,36 +16,38 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="186dp"
         android:background="@color/white"
+        android:padding="5dp"
         >
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
+
 
             >
 
             <Button
                 android:id="@+id/changepassword"
                 style="@style/profile_buttons"
-                android:text="Promeni lozinku"
+                android:text="@string/edit_password"
                 android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/editdata"
                 style="@style/profile_buttons"
-                android:text="Izmeni detalje"
+                android:text="@string/edit_details"
                 android:textAlignment="center"/>
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
             <TextView
                 style="@style/profile_row"
-                android:text="Ime:"
-                >
+                android:text="@string/name_label"
+               >
             </TextView>
             <TextView
                 android:id="@+id/firstname"
@@ -56,12 +58,12 @@
 
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
             <TextView
                 style="@style/profile_row"
-                android:text="Prezime:"
+                android:text="@string/lastname_label"
                 >
             </TextView>
             <TextView
@@ -73,14 +75,13 @@
 
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
+
             <TextView
                 style="@style/profile_row"
-                android:text="Korisničko ime:"
-                >
-            </TextView>
+                android:text="@string/username_label"/>
             <TextView
                 android:id="@+id/username"
                 style="@style/profile_row"
@@ -90,12 +91,12 @@
 
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
             <TextView
                 style="@style/profile_row"
-                android:text="Adresa:"
+                android:text="@string/address_label"
                 >
             </TextView>
             <TextView
@@ -106,14 +107,14 @@
 
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
 
 
             <TextView
                 style="@style/profile_row"
-                android:text="Kontakt telefon:"/>
+                android:text="@string/phone_label"/>
             <TextView
                 style="@style/profile_row"
                 android:id="@+id/phone"
@@ -121,12 +122,12 @@
 
         </TableRow>
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
             <TextView
                 style="@style/profile_row"
-                android:text="Email adresa:" />
+                android:text="@string/email_label" />
             <TextView
                 style="@style/profile_row"
                 android:id="@+id/email"

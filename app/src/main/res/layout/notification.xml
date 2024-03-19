@@ -1,155 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.google.android.material.card.MaterialCardView  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    app:strokeColor="#FFFF"
-    app:cardBackgroundColor="#FFFF"
-    >
-    <LinearLayout
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+    <com.google.android.material.card.MaterialCardView
+
+        app:strokeColor="#FFFF"
+        app:cardBackgroundColor="#FFFF"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+
         >
-        <!-- Header TextView -->
-        <TextView
-            android:id="@+id/status"
-            style="@style/order_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:text="Vaša porudžbina kreirana {{showdate(order.date)}} je odbijena."
-            />
-        <TextView
-            style="@style/order_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:text="Detalji porudžbine"
-            />
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:orientation="vertical"
             >
-            <TableRow
+            <!-- Header TextView -->
+            <TextView
+                android:id="@+id/status"
+                style="@style/order_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
-                <TextView
-                    style="@style/order_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text=""
-                    android:layout_weight="6"
-                    />
-                <TextView
-                    style="@style/order_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:text="Količina"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    style="@style/order_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cena"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    style="@style/order_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:layout_weight="1"
-                    />
-            </TableRow>
-        </TableLayout>
-        <!-- Svaka stavka u porudzbini -->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            tools:listitem="@layout/item"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@android:color/black"/>
-        <TextView
-            android:id="@+id/price"
-            style="@style/order_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ukupna cena: 5000 din"
-            android:paddingEnd="20dp"
-            />
-        <TextView
-            android:id="@+id/delivery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/order_text"
-            android:padding="10dp"
-            android:text="Podaci o dostavi"
-            android:background="@color/white"
-            >
-        </TextView>
-        <TextView
-            android:id="@+id/buyer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/order_text"
-            android:padding="10dp"
-            android:paddingStart="20dp"
-            android:background="@color/white"
-            >
-        </TextView>
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/order_text"
-            android:padding="10dp"
-            android:paddingStart="20dp"
-            android:background="@color/white"
-            >
-        </TextView>
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/order_text"
-            android:padding="10dp"
-            android:paddingStart="20dp"
-            android:background="@color/white"
-            >
-        </TextView>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TableRow
-                android:gravity="center_horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                />
+            <TextView
+                style="@style/order_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/purchase_details"
+                />
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-                <Button
-                    android:text="Potvrdi porudžbinu"
-                    android:id="@+id/purchasebutton"
-                    style="@style/newcommentbtn"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center_horizontal">
-                </Button>
-            </TableRow>
-        </TableLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <TextView
+                        style="@style/order_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:layout_weight="4"
+                        />
+                    <TextView
+                        style="@style/order_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quantity"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        style="@style/order_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        style="@style/order_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_weight="1"
+                        />
+                </TableRow>
+            </TableLayout>
+            <!-- Svaka stavka u porudzbini -->
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                tools:listitem="@layout/item" />
 
-</com.google.android.material.card.MaterialCardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@android:color/black"/>
+            <TextView
+                android:id="@+id/price"
+                style="@style/order_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                />
+            <TextView
+                android:id="@+id/delivery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/order_text"
+                android:padding="10dp"
+                android:text="@string/delivery_info"
+                android:background="@color/white"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/buyer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/order_text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                android:background="@color/white"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/order_text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                android:background="@color/white"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/order_text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                android:background="@color/white"
+                >
+            </TextView>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <Button
+                        android:text="@string/purchase"
+                        android:id="@+id/purchasebutton"
+                        style="@style/newcommentbtn"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal">
+                    </Button>
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

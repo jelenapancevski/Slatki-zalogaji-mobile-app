@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -13,8 +12,6 @@ import retrofit2.Call
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.viewmodels.UserViewModel
 import retrofit2.Response
-import org.bson.types.ObjectId
-import org.w3c.dom.Text
 import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
@@ -26,15 +23,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
-        message = findViewById(R.id.message);
+        message = findViewById(R.id.message)
         username = findViewById(R.id.username)
         password = findViewById(R.id.password)
         loginButton = findViewById(R.id.loginButton)
-        userViewModel = UserViewModel();
+        userViewModel = UserViewModel()
 
         loginButton.setOnClickListener {
             if (username.text.isNullOrBlank() || password.text.isNullOrBlank()) {
-                message.text = "Neophodno je uneti korisničko ime i lozinku"
+                message.text = getString(R.string.username_password_message)
 
             }
             else {
@@ -53,20 +50,20 @@ class MainActivity : AppCompatActivity() {
                                     startActivity(intent)
                                 }
                                 else {
-                                    message.text="Uneti kredencijali nisu validni"
+                                    message.text = getString(R.string.invalid_credentials)
                                 }
-                                message.text="Prijava je uspešna!"
+                                message.text = getString(R.string.successful_login)
                             } else {
-                                message.text="Uneti kredencijali nisu validni"
+                                message.text = getString(R.string.invalid_credentials)
                             }
                         } else {
-                            message.text="Greška prilikom prijave"
+                            message.text = getString(R.string.invalid_credentials)
                         }
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
                         // Handle failure
-                        message.text="Uneti kredencijali nisu validni"
+                        message.text = getString(R.string.login_error)
                     }
                 })
 

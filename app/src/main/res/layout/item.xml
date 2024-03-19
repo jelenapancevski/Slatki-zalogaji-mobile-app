@@ -14,23 +14,19 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/profilebackground"
-
             >
         </ImageView>
         <TextView
             android:id="@+id/name"
             style="@style/order_text"
-            android:text="Maskarpone torta"
             android:textAlignment="center"
             android:layout_weight="1"
-
+            android:maxWidth="15sp"
             >
         </TextView>
         <TextView
             android:id="@+id/quantity"
             style="@style/order_text"
-            android:text="1"
             android:textAlignment="center"
             android:layout_weight="1"
             >
@@ -39,7 +35,6 @@
         <TextView
             android:id="@+id/price"
             style="@style/order_text"
-            android:text="2500 din"
             android:textAlignment="center"
             android:layout_weight="1"
             />

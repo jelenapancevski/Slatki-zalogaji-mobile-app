@@ -18,16 +18,16 @@ app:cardBackgroundColor="#FFFF"
         style="@style/comment_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="Djoxon"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
         />
     <TextView
         android:id="@+id/dateandtime"
         style="@style/comment_dateandtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="15/02/2024 15:30h"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
         />
 
     <TextView
@@ -35,8 +35,8 @@ app:cardBackgroundColor="#FFFF"
         style="@style/comment_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="Narucio sam je za rodjendan svi gosti su bili odusevljeni preporucio bih je svakome."
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
         />
 
 </LinearLayout>

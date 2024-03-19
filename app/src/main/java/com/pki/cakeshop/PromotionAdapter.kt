@@ -19,7 +19,7 @@ import java.io.IOException
 class PromotionAdapter (private val promotions: List<Promotion>, private val layout:Int) :
     RecyclerView.Adapter<PromotionAdapter.PromotionViewHolder>() {
     class PromotionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView
+        private val title: TextView
         val image: ImageView
         val text: TextView
 
@@ -52,8 +52,8 @@ class PromotionAdapter (private val promotions: List<Promotion>, private val lay
                         // Handle failure
                     }
                 })
-            title.setText(promotion.name)
-            text.setText(promotion.description)
+            title.text = promotion.name
+            text.text = promotion.description
         }
     }
     // Create new views (invoked by the layout manager)

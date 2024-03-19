@@ -1,26 +1,33 @@
 package com.pki.cakeshop
-
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
+
 
 open class MenuActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.mainmenu, menu)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setCustomView(R.layout.title_layout)
+        supportActionBar?.customView?.findViewById<TextView>(R.id.title_home)?.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+        supportActionBar?.customView?.findViewById<TextView>(R.id.title_home)?.apply {
+            textSize = 35f
+            typeface = ResourcesCompat.getFont(context, R.font.inspiration)
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            /*R.id.action_products->{
-                 showProductsMenu()
-                true
-            }*/
             R.id.action_cakes -> {
                 val intent = Intent(this,
                     ProductsActivity::class.java).apply {
@@ -91,29 +98,5 @@ open class MenuActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-    /*private fun showProductsMenu() {
-        val popupMenu = PopupMenu(this, findViewById(R.id.action_products) )
-        popupMenu.menuInflater.inflate(R.menu.productsmenu, popupMenu.menu)
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId) {
-                R.id.action_cakes -> {
-                    val intent = Intent(this,
-                        CakesActivity::class.java).apply {
-                    }
-                    startActivity(intent)
-                    true
-                }
-                R.id.action_desserts -> {
-                    val intent = Intent(this,
-                        DessertsActivity::class.java).apply {
-                    }
-                    startActivity(intent)
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-*/
+
 }

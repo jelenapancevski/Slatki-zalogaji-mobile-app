@@ -20,8 +20,8 @@ class PromotionsActivity : MenuActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.promotions)
         promotionViewModel = PromotionViewModel()
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         promotionViewModel.get(object : Callback<List<Promotion>> {
             override fun onResponse(
@@ -30,13 +30,12 @@ class PromotionsActivity : MenuActivity() {
             ) {
                 if (response.isSuccessful) {
                     promotions = response.body()!!
-                    adapter = PromotionAdapter(promotions,R.layout.promotion);
+                    adapter = PromotionAdapter(promotions,R.layout.promotion)
                     recyclerView.adapter=adapter
 
                 } else {
                     // Handle the case where the request was not successful
                     Log.e("PromotionActivity", "Request failed: ${response.code()}")
-                    Log.e("ERRROR", "" + call.request().body)
                 }
             }
             override fun onFailure(call: Call<List<Promotion>>, t: Throwable) {

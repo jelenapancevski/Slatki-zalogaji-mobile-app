@@ -3,14 +3,14 @@
     <style name="input">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:color">@color/antiquebrass</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@color/white</item>
         <item name="android:textColorHint">@color/pink</item>
     </style>
 
     <style name="title">
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">50dp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/pink</item>
         <item name="android:paddingTop">10dp</item>
@@ -21,7 +21,7 @@
         <item name="android:backgroundTint">@color/antiquebrass</item>
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
 
     </style>
     <style name="message">
@@ -35,24 +35,24 @@
     // Contact styles
     <style name="contact_title">
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/darkbrown</item>
         <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="android:fontFamily">@font/inspiration</item>
         <item name="android:layout_gravity">center</item>
     </style>
     <style name="contact_header">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginBottom"> 10dp</item>
     </style>
     <style name="contact_row">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginBottom"> 10dp</item>
     </style>
@@ -77,7 +77,7 @@
         <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
     </style>
-    <style name="cakes_title">
+    <style name="product_title">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/pink</item>
         <item name="android:textSize">45sp</item>
@@ -89,14 +89,14 @@
     <style name="profile_buttons">
         <item name="android:textColor">@color/pink</item>
         <item name="android:fontFamily">@font/atma</item>
-        <item name="android:textSize">50px</item>
+        <item name="android:textSize">23sp</item>
         <item name="android:background">@android:color/transparent</item>
 
     </style>
     <style name="profile_row">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/pink</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:layout_marginBottom"> 10dp</item>
         <item name="android:layout_marginLeft"> 10dp</item>
@@ -105,7 +105,7 @@
     <style name="cancel_button">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/atma</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:background">@android:color/transparent</item>
 
     </style>
@@ -113,79 +113,80 @@
     <style name="product_info_name">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">50dp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="product_info_description">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">fill </item>
         <item name="android:background">@color/antiquebrass</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="product_info_price">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="product_info_subtitle">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:background">@color/peachy</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="product_info_ingredients">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:background">@color/peachy</item>
-        <item name="android:gravity">left</item>
+        <item name="android:paddingStart">25dp</item>
     </style>
 
     <style name="newcomment">
         <item name="android:fontFamily"> @font/annie</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="boxStrokeColor">@color/white</item>
     </style>
     <style name="newcommentbtn">
         <item name="android:backgroundTint">@color/green</item>
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     //Comment
     <style name="comment_username">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/pink</item>
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:gravity">left</item>
     </style>
     <style name="comment_dateandtime">
         <item name="android:fontFamily">@font/atma</item>
         <item name="android:textColor">@color/antiquebrass</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:gravity">left</item>
     </style>
     <style name="comment_comment">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/darkbrown</item>
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:gravity">left</item>
     </style>
     // Notifications
     <style name="order_text">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">left</item>
     </style>
     <style name="order_price">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">right</item>
     </style>
 
@@ -205,7 +206,7 @@
     <style name="home_promotion">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/offwhite</item>
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:background">@color/antiquebrass</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
@@ -213,7 +214,7 @@
     <style name="home_promotion_title">
         <item name="android:fontFamily">@font/annie</item>
         <item name="android:textColor">@color/offwhite</item>
-        <item name="android:textSize">35dp</item>
+        <item name="android:textSize">35sp</item>
         <item name="android:background">@color/antiquebrass</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
@@ -222,14 +223,10 @@
     <style name="LoginTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/offwhite</item>
     </style>
-
-    // Menu
-
-    <style name="menu_option">
-        <item name="backgroundColor">@color/pink</item>
-        <item name="android:textColor">@color/offwhite</item>
-        <item name="android:textSize">35dp</item>
-        <item name="android:fontFamily">@font/annie</item>
-    </style>
+<style name="menu_item">
+    <item name="fontFamily">@font/annie</item>
+    <item name="android:textSize">30sp</item>
+    <item name="android:textColor">@color/offwhite</item>
+</style>
 </resources>
 

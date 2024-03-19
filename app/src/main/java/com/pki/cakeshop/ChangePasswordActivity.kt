@@ -2,10 +2,10 @@ package com.pki.cakeshop
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -18,7 +18,7 @@ import retrofit2.Response
 
 class ChangePasswordActivity : MenuActivity() {
     private lateinit var userViewModel: UserViewModel
-    private lateinit var users: List<User>
+
     // Function to check for at least one uppercase letter
     fun hasUpperCase(input: String): Boolean {
         val upperCaseRegex = Regex("[A-Z]+")
@@ -41,10 +41,13 @@ class ChangePasswordActivity : MenuActivity() {
         setContentView(R.layout.changepassword)
         userViewModel = UserViewModel()
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
-        val user: User = Gson().fromJson(pref.getString("user",null), User::class.java)
-        if(user==null){
+        if(pref.getString("user",null)==null){
             //error
+            Log.e("ChangePasswordActivity", "Error user is null")
+            return
         }
+        val user: User = Gson().fromJson(pref.getString("user",null), User::class.java)
+
         findViewById<Button>(R.id.cancel_button).setOnClickListener{
             val intent = Intent(this@ChangePasswordActivity, ProfileActivity::class.java)
             startActivity(intent)
@@ -62,48 +65,57 @@ class ChangePasswordActivity : MenuActivity() {
                 // val isValid = hasUpperCase(password) && hasSpecialCharacter(password) && hasNumber(password)
 
                 if(!hasUpperCase(password)){
-                    findViewById<EditText>(R.id.newpassword).error ="Lozinka mora sadržati bar jedno veliko slovo"
+                    findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_one_upper_case_error)
                 }
                 if(!hasSpecialCharacter(password)){
-                    findViewById<EditText>(R.id.newpassword).error = " Lozinka mora sadržati bar jedan specijalni karakter"
+                    findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_one_special_character_error)
                 }
                 if (!hasNumber(password)) {
-                    findViewById<EditText>(R.id.newpassword).error = "Lozinka mora sadržati bar jedan broj"
+                    findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_one_number_error)
                 }
             }
         })
 
         findViewById<Button>(R.id.changepass).setOnClickListener{
-            val currentpassword = findViewById<TextView>(R.id.currentpassword).text
-            val newpassword = findViewById<TextView>(R.id.newpassword).text
-            val confirmpassword = findViewById<TextView>(R.id.confirmpassword).text
-            if(currentpassword.isNullOrBlank() || newpassword.isNullOrBlank() || confirmpassword.isNullOrBlank()){
-                findViewById<TextView>(R.id.message).text = "Potrebno je uneti sve tražene podatke"
+            val currentPassword = findViewById<TextView>(R.id.currentpassword).text
+            val newPassword = findViewById<TextView>(R.id.newpassword).text
+            val confirmPassword = findViewById<TextView>(R.id.confirmpassword).text
+            if(currentPassword.isNullOrBlank() || newPassword.isNullOrBlank() || confirmPassword.isNullOrBlank()){
+                findViewById<TextView>(R.id.message).text = getString(R.string.edit_data_not_provided_error_message)
                 return@setOnClickListener
             }
-            if(currentpassword.toString()!=user.password){
-                findViewById<TextView>(R.id.message).text = "Trenutna lozinka nije tačna"
+            if(currentPassword.toString()!=user.password){
+                findViewById<TextView>(R.id.message).text = getString(R.string.current_password_incorrect_message)
                 return@setOnClickListener
             }
-            if(newpassword.toString()!=confirmpassword.toString()){
-                findViewById<TextView>(R.id.message).text = "Lozinke se ne podudaraju"
+            if(newPassword.toString()!=confirmPassword.toString()){
+                findViewById<TextView>(R.id.message).text = getString(R.string.passwords_dont_match_message)
                 return@setOnClickListener
             }
             //check if password contains all the important elements
-            val isValid = hasUpperCase(newpassword.toString()) && hasSpecialCharacter(newpassword.toString()) && hasNumber(newpassword.toString())
+            val isValid = hasUpperCase(newPassword.toString()) && hasSpecialCharacter(newPassword.toString()) && hasNumber(newPassword.toString())
             if(!isValid){
-                findViewById<TextView>(R.id.message).text= "Lozinka mora sadržati bar jedno veliko slovo, jedan specijalan karakter i jednu cifru"
+                findViewById<TextView>(R.id.message).text= getString(R.string.password_contains_characters_message)
                 return@setOnClickListener
             }
             //valid change password
-            userViewModel.changePassword(user._id,newpassword.toString(),object : Callback<String> {
+            userViewModel.changePassword(user._id,newPassword.toString(),object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    findViewById<TextView>(R.id.message).text= response.message()
+                    findViewById<TextView>(R.id.message).text= getString(R.string.password_changed_message)
                     // Logout user from application
+                    val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
+                    val edit = pref.edit()
+                    edit.remove("order")
+                    edit.remove("user")
+                    edit.remove("product")
+                    edit.remove("product_image")
+                    val intent = Intent(this@ChangePasswordActivity, MainActivity::class.java).apply {
+                    }
+                    startActivity(intent)
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    findViewById<TextView>(R.id.message).text= "Greška prilikom promene lozinke"
+                    findViewById<TextView>(R.id.message).text= getString(R.string.password_change_error)
 
                 }
 

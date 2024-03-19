@@ -1,7 +1,6 @@
 package com.pki.cakeshop
 
 import android.util.Log
-import com.pki.cakeshop.models.Promotion
 import com.pki.cakeshop.services.OrderService
 import com.pki.cakeshop.services.ProductService
 import com.pki.cakeshop.services.PromotionService
@@ -15,11 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:4000/"
     // Create a logging interceptor for debugging purposes
-    val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-        override fun log(message: String) {
-            Log.d("Retrofit", message) // Custom tag "Retrofit" is used here
-        }
-    }).apply {
+    private val loggingInterceptor = HttpLoggingInterceptor { message ->
+        Log.d("Retrofit", message) // Custom tag "Retrofit" is used here
+    }.apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 

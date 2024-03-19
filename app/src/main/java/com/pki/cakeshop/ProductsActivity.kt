@@ -1,4 +1,6 @@
 package com.pki.cakeshop
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -6,6 +8,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.viewmodels.ProductViewModel
 import okhttp3.ResponseBody
@@ -14,27 +17,29 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class ProductsActivity : MenuActivity() {
+class ProductsActivity : MenuActivity(){
     private lateinit var type:String
     private lateinit var productViewModel: ProductViewModel
-    private lateinit var products: List<Product>
+    private lateinit var products: MutableList<Product>
     private lateinit var images: MutableMap<String,Bitmap>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
+    val  REQUEST_CODE_UPDATE_PRODUCT=1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.allproducts)
+
         type = intent.getStringExtra("type").toString()
-        if(type.equals("torta")){
-            findViewById<TextView>(R.id.title).text="Torte"
+        if(type == "torta"){
+            findViewById<TextView>(R.id.title).text = getString(R.string.cakes)
         }
         else {
-            findViewById<TextView>(R.id.title).text="Kolači"
+            findViewById<TextView>(R.id.title).text = getString(R.string.desserts)
         }
         productViewModel = ProductViewModel()
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         images = mutableMapOf()
         productViewModel.type(type,object : Callback<List<Product>> {
             override fun onResponse(
@@ -42,7 +47,7 @@ class ProductsActivity : MenuActivity() {
                 response: Response<List<Product>>
             ) {
                 if (response.isSuccessful) {
-                    products = response.body()!!
+                    products = (response.body() as MutableList<Product>?)!!
                     getImages()
                     adapter = ProductAdapter(this@ProductsActivity,products,images)
                     recyclerView.adapter=adapter
@@ -88,23 +93,23 @@ class ProductsActivity : MenuActivity() {
         }
 
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_UPDATE_PRODUCT && resultCode == Activity.RESULT_OK) {
+            val updatedProduct = Gson().fromJson(data?.extras?.getString("updatedProduct"),Product::class.java)
 
-    /*
-    val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val updatedProductJson = data?.getStringExtra("updatedProduct")
-                val updatedProduct = Gson().fromJson(updatedProductJson, Product::class.java)
-                cakes.forEach { cake->
-                    if(cake._id==updatedProduct._id){
-                       cake.comments = updatedProduct.comments
-                    }
-                }
-                // Update the list of products with the updated product
+            // Update the product in the list
+            var index=0
+            while(index<products.size){
+                if(products[index]._id==updatedProduct._id)break
+                else index++
             }
-        }
+            products[index] = updatedProduct
+            adapter.notifyItemChanged(index)
 
-    */
+
+        }
+    }
+
 
 }

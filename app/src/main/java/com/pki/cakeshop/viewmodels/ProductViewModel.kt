@@ -1,21 +1,15 @@
 package com.pki.cakeshop.viewmodels
 import androidx.lifecycle.ViewModel
 import com.pki.cakeshop.RetrofitClient
-import com.pki.cakeshop.models.Comment
 import com.pki.cakeshop.models.CommentData
 import com.pki.cakeshop.models.Product
 import com.pki.cakeshop.repositories.ProductRepository
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import java.util.Date
+
 
 class ProductViewModel: ViewModel() {
-    private val productRepository= ProductRepository(RetrofitClient.productService);
+    private val productRepository= ProductRepository(RetrofitClient.productService)
     fun get (callback:Callback<List<Product>>){
         productRepository.get(callback)
     }

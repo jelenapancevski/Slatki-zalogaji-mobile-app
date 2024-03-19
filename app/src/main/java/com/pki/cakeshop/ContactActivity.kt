@@ -1,28 +1,26 @@
 package com.pki.cakeshop
 
 import android.os.Bundle
-import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
 
 
 class ContactActivity: MenuActivity() {
 
-    private lateinit var map: WebView;
+    private lateinit var map: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.contact)
 
         // Find the WebView by its ID
-        map = findViewById<WebView>(R.id.map)
+        map = findViewById(R.id.map)
 
         // Enable JavaScript (required for Google Maps Embed API)
 
         // Enable JavaScript (required for Google Maps Embed API)
-        val webSettings: WebSettings = map.getSettings()
+        val webSettings: WebSettings = map.settings
         webSettings.javaScriptEnabled = true
         map.webViewClient = WebViewClient()
 

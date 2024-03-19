@@ -2,7 +2,6 @@ package com.pki.cakeshop
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,7 +11,6 @@ import com.pki.cakeshop.models.Address
 import com.pki.cakeshop.models.User
 import com.pki.cakeshop.models.UserData
 import com.pki.cakeshop.viewmodels.UserViewModel
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,30 +19,38 @@ class EditDataActivity : MenuActivity() {
     private lateinit var user: User
     private lateinit var users: List<User>
     private lateinit var userViewModel: UserViewModel
+    private lateinit var username: TextView
+    private lateinit var firstname: TextView
+    private lateinit var lastname: TextView
+    private lateinit var city: TextView
+    private lateinit var street: TextView
+    private lateinit var number: TextView
+    private lateinit var phone: TextView
+    private lateinit var email: TextView
 
-    fun isEmailValid(email: String): Boolean {
-        val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
+    private fun isEmailValid(email: String): Boolean {
+        val emailRegex = "^[A-Za-z](.*)(@)(.{1,})(\\.)(.{1,})"
         return emailRegex.toRegex().matches(email)
     }
-    fun phoneNumber(input: String): Boolean {
+    private fun phoneNumber(input: String): Boolean {
         val phoneNumberRegex = Regex("^06[0-9]{7,8}\$")
         return phoneNumberRegex.containsMatchIn(input)
     }
     // check if number of street is correct pattern
-    fun streetNumber(input: String): Boolean {
+    private fun streetNumber(input: String): Boolean {
         val streetNumberRegex = Regex("^[1-9]+[0-9]*\$")
         return streetNumberRegex.containsMatchIn(input)
     }
-    fun emailTaken(_id:String,email:String):Boolean{
-        var found:Boolean=false
-        users.forEach { user-> if(user.email==email && user._id!=_id) found=true }
+    private fun emailTaken(id:String, email:String):Boolean{
+        var found=false
+        users.forEach { user-> if(user.email==email && user._id!=id) found=true }
         return found
 
 
     }
-   fun usernameTaken(_id:String,username:String):Boolean{
-        var found:Boolean=false
-        users.forEach { user-> if(user.username==username && user._id!=_id) found=true }
+   private fun usernameTaken(id:String, username:String):Boolean{
+        var found=false
+        users.forEach { user-> if(user.username==username && user._id!=id) found=true }
         return found
     }
 
@@ -63,80 +69,94 @@ class EditDataActivity : MenuActivity() {
         })
 
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
-        user = Gson().fromJson(pref.getString("user",null),User::class.java)
-        if(user==null){
+        if(pref.getString("user",null)==null){
             //error
+            Log.e("EditDataActivity", "Error user is null")
+            return
         }
+        user = Gson().fromJson(pref.getString("user",null),User::class.java)
+
         findViewById<Button>(R.id.cancel_button).setOnClickListener{
             val intent = Intent(this@EditDataActivity, ProfileActivity::class.java)
             startActivity(intent)
             return@setOnClickListener
         }
-        findViewById<TextView>(R.id.firstname).text=user.firstname
-        findViewById<TextView>(R.id.lastname).text = user.lastname
-        findViewById<TextView>(R.id.username).text = user.username
-        findViewById<TextView>(R.id.city).text = user.address.city
-        findViewById<TextView>(R.id.street).text = user.address.street
-        findViewById<TextView>(R.id.number).text = user.address.number.toString()
-        findViewById<TextView>(R.id.phone).text = user.phone
-        findViewById<TextView>(R.id.email).text = user.email
+        firstname =  findViewById(R.id.firstname)
+        firstname.text = user.firstname
+
+        lastname = findViewById(R.id.lastname)
+        lastname.text = user.lastname
+
+        username = findViewById(R.id.username)
+        username.text = user.username
+
+        city = findViewById(R.id.city)
+        city.text = user.address.city
+        street = findViewById(R.id.street)
+        street.text = user.address.street
+        number = findViewById(R.id.number)
+        number.text = user.address.number.toString()
+        phone = findViewById(R.id.phone)
+        phone.text = user.phone
+        email = findViewById(R.id.email)
+        email.text = user.email
 
 
         findViewById<Button>(R.id.updatedata).setOnClickListener{
-            if(findViewById<TextView>(R.id.username).text.isNullOrBlank() || findViewById<TextView>(R.id.firstname).text.isNullOrBlank() ||
-                findViewById<TextView>(R.id.lastname).text.isNullOrBlank() || findViewById<TextView>(R.id.street).text.isNullOrBlank() ||
-                findViewById<TextView>(R.id.number).text.isNullOrBlank() || findViewById<TextView>(R.id.city).text.isNullOrBlank() || findViewById<TextView>(R.id.phone).text.isNullOrBlank() ||
-                findViewById<TextView>(R.id.email).text.isNullOrBlank()){
-                findViewById<TextView>(R.id.message).text = "Potrebno je uneti sve tražene podatke"
+            if(username.text.isNullOrBlank() || firstname.text.isNullOrBlank() ||
+                lastname.text.isNullOrBlank() || street.text.isNullOrBlank() ||
+                number.text.isNullOrBlank() || city.text.isNullOrBlank() || phone.text.isNullOrBlank() ||
+                email.text.isNullOrBlank()){
+                findViewById<TextView>(R.id.message).text = getString(R.string.edit_data_not_provided_error_message)
                 return@setOnClickListener
 
             }
             //check if username is taken
            if(usernameTaken(user._id,findViewById<TextView>(R.id.username).text.toString())){
-               findViewById<TextView>(R.id.message).text = "Korisničko ime je zauzeto"
+               findViewById<TextView>(R.id.message).text = getString(R.string.username_taken_message)
                return@setOnClickListener
            }
             // check if number of street is correct pattern
             if(!streetNumber(findViewById<TextView>(R.id.number).text.toString())){
-                findViewById<TextView>(R.id.number).error = "Pogrešan format"
+                number.error = getString(R.string.address_format_message)
                 return@setOnClickListener
             }
             //phone number correct pattern
             if(!phoneNumber(findViewById<TextView>(R.id.phone).text.toString())){
-                findViewById<TextView>(R.id.phone).error = "Pogrešan format e.g. 061123456"
+                phone.error = getString(R.string.phone_format_message)
                 return@setOnClickListener
             }
             //email format and taken
             if(!isEmailValid(findViewById<TextView>(R.id.email).text.toString())){
-                findViewById<TextView>(R.id.email).error = "Pogrešan format"
+                email.error = getString(R.string.email_format_message)
                 return@setOnClickListener
             }
 
             if(emailTaken(user._id,findViewById<TextView>(R.id.email).text.toString())){
-                findViewById<TextView>(R.id.message).text =  "Email adresa je zauzeta"
+                findViewById<TextView>(R.id.message).text =  getString(R.string.email_taken_message)
                 return@setOnClickListener
             }
 
             //valid update data
-            var newuser:User = User(
+            val newUser = User(
                 user._id,
-                findViewById<TextView>(R.id.username).text.toString(),
+                username.text.toString(),
                 user.password,
-                findViewById<TextView>(R.id.firstname).text.toString(),
-                findViewById<TextView>(R.id.lastname).text.toString(),
+               firstname.text.toString(),
+                lastname.text.toString(),
                 Address(
-                    findViewById<TextView>(R.id.street).text.toString(),
-                    Integer.parseInt(findViewById<TextView>(R.id.number).text.toString()),
-                    findViewById<TextView>(R.id.city).text.toString()
+                   street.text.toString(),
+                    Integer.parseInt(number.text.toString()),
+                    city.text.toString()
                 ),
-                findViewById<TextView>(R.id.phone).text.toString(),
-                findViewById<TextView>(R.id.email).text.toString(),
+                phone.text.toString(),
+                email.text.toString(),
                 user.type)
 
-            Log.e("USER", newuser.toString())
-            userViewModel.edit(UserData(newuser),object : Callback<String> {
+
+            userViewModel.edit(UserData(newUser),object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    findViewById<TextView>(R.id.message).text= newuser._id
+                    findViewById<TextView>(R.id.message).text= newUser._id
                     // Return to profile and update user
                     userViewModel.user(user._id,object:Callback<User>{
                         override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -156,7 +176,7 @@ class EditDataActivity : MenuActivity() {
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    findViewById<TextView>(R.id.message).text= "Greška prilikom promene podataka"
+                    findViewById<TextView>(R.id.message).text= getString(R.string.data_change_error)
 
                 }
 

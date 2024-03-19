@@ -1,12 +1,18 @@
 package com.pki.cakeshop
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.OnBackPressedDispatcherOwner
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Product
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,37 +30,51 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.Date
 
-class ProductActivity : MenuActivity() {
+class ProductActivity : MenuActivity(), OnBackPressedDispatcherOwner {
     private lateinit var  userViewModel:UserViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var product: Product
     private lateinit var image:Bitmap
     private lateinit var commentsView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
-    private lateinit var newcomment: TextInputEditText
+    private lateinit var newComment: TextInputEditText
     private lateinit var user:User
     private lateinit var amount:TextInputEditText
     private lateinit var order:Order
+    private val backCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // Handle back button press here
+            // Update the product and send it to the ProductsActivity
+            val returnIntent = Intent()
+            returnIntent.putExtra("updatedProduct", Gson().toJson(product))
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product)
+        onBackPressedDispatcher.addCallback(this, backCallback)
         userViewModel = UserViewModel()
         productViewModel = ProductViewModel()
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
         product = Gson().fromJson(pref.getString("product",null),Product::class.java)
         image = Gson().fromJson(pref.getString("product_image",null),Bitmap::class.java)
-        user = Gson().fromJson(pref.getString("user",null),User::class.java)
 
-        if(user==null){
+        if(pref.getString("user",null)==null){
             //error
+            Log.e("ProductActivity", "Error user is null")
+            return
         }
-        commentsView = findViewById(R.id.comments);
-        commentsView.setLayoutManager(LinearLayoutManager(this));
+        user = Gson().fromJson(pref.getString("user",null),User::class.java)
+        commentsView = findViewById(R.id.comments)
+        commentsView.layoutManager=LinearLayoutManager(this)
         findViewById<TextView>(R.id.name).text=product.name
         findViewById<TextView>(R.id.description).text=product.description
-        findViewById<TextView>(R.id.price).text="Cena "+product.price.toString()+" din"
+        findViewById<TextView>(R.id.price).text= getString(R.string.product_price,product.price.toString())
         findViewById<ImageView>(R.id.image).setImageBitmap(image)
-        var ingredients:String=""
+        var ingredients=""
         product.ingridients.forEach { ingredient->
             ingredients+=ingredient+"\n"
         }
@@ -74,11 +94,11 @@ class ProductActivity : MenuActivity() {
             }
             else order = Gson().fromJson(pref.getString("order",null),Order::class.java)
 
-            var found=false
+            var found = false
             this.order.products.forEach { prod ->
                 if (prod.productid == this.product._id) {
-                    prod.amount += Integer.parseInt(amount.text.toString());
-                    found = true;
+                    prod.amount += Integer.parseInt(amount.text.toString())
+                    found = true
                 }
             }
             if(!found){
@@ -86,7 +106,7 @@ class ProductActivity : MenuActivity() {
 
 
             Log.e("ORDER",order.toString())
-            findViewById<TextView>(R.id.message).text="Proizvod je uspešno dodat u korpu!"
+            findViewById<TextView>(R.id.message).text = getString(R.string.added_to_basket)
             //save updated order
             val editor = pref.edit()
             editor.putString("order", Gson().toJson(order))
@@ -97,24 +117,27 @@ class ProductActivity : MenuActivity() {
 
         }
 
-        newcomment = findViewById(R.id.newcomment)
+        newComment = findViewById(R.id.newcomment)
         findViewById<Button>(R.id.addcomment).setOnClickListener{
-                if(newcomment.text.isNullOrBlank()){
+                if(newComment.text.isNullOrBlank()){
                     return@setOnClickListener
                 }
             // else add new comment
-            val comment : Comment = Comment(user._id,newcomment.text.toString(), Date())
+            val comment = Comment(user._id,newComment.text.toString(), Date())
             productViewModel.comment(CommentData(comment,product._id),object:Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if(response.isSuccessful && response.body().equals("Added comment")){
-                        newcomment.setText("")
+                        newComment.setText("")
+                        newComment.clearFocus()
+
                         product.comments.add(0,comment)
                         commentAdapter.notifyItemInserted(0)
-                        // update list of products
-                        /*val returnIntent = Intent()
-                        returnIntent.putExtra("updatedProduct", Gson().toJson(product))
-                        setResult(Activity.RESULT_OK, returnIntent)
-                        finish()*/
+
+                        commentsView.scrollToPosition(0)
+                        if(commentsView.getChildAt(0)!=null)
+                            findViewById<ScrollView>(R.id.scroll).scrollTo(0,commentsView.getChildAt(0).top )
+                        hideKeyboard()
+
                     }
                 }
 
@@ -124,5 +147,9 @@ class ProductActivity : MenuActivity() {
 
             })
         }
+    }
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

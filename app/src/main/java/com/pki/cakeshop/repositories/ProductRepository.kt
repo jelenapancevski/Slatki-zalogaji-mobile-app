@@ -1,21 +1,11 @@
 package com.pki.cakeshop.repositories
 
-import com.pki.cakeshop.models.Comment
 import com.pki.cakeshop.models.CommentData
 import com.pki.cakeshop.models.Product
-import com.pki.cakeshop.models.Promotion
-import com.pki.cakeshop.models.User
 import com.pki.cakeshop.services.ProductService
-import com.pki.cakeshop.services.PromotionService
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
-import java.util.Date
+
 
 class ProductRepository(private val productService:ProductService) {
     fun get (callback:Callback<List<Product>>){

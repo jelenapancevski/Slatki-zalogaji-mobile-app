@@ -1,4 +1,5 @@
 package com.pki.cakeshop
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,10 +14,12 @@ import com.pki.cakeshop.models.Product
 class ProductAdapter ( private val context: Context, private val products: List<Product>, private val images: Map<String,Bitmap>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
    inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView
-        val image: ImageView
+        private val name: TextView
+        private val image: ImageView
+        private val  REQUEST_CODE_UPDATE_PRODUCT=1
 
-        init {
+
+       init {
             // Define click listener for the ViewHolder's View
             name = view.findViewById(R.id.product_name)
             image = view.findViewById(R.id.product_image)
@@ -26,7 +29,7 @@ class ProductAdapter ( private val context: Context, private val products: List<
             img?.let { img->
                 image.setImageBitmap(img)
             }
-            name.setText(product.name)
+            name.text = product.name
 
             image.setOnClickListener{
                 val pref = context.getSharedPreferences("data", Context.MODE_PRIVATE)
@@ -35,7 +38,7 @@ class ProductAdapter ( private val context: Context, private val products: List<
                 editor.putString("product_image",Gson().toJson(img))
                 editor.apply()
                 val intent = Intent(context, ProductActivity::class.java)
-                context.startActivity(intent)
+                (context as Activity).startActivityForResult(intent, REQUEST_CODE_UPDATE_PRODUCT)
             }
             name.setOnClickListener{
                 val pref = context.getSharedPreferences("data", Context.MODE_PRIVATE)
@@ -44,7 +47,7 @@ class ProductAdapter ( private val context: Context, private val products: List<
                 editor.putString("product_image",Gson().toJson(img))
                 editor.apply()
                 val intent = Intent(context, ProductActivity::class.java)
-                context.startActivity(intent)
+                (context as Activity).startActivityForResult(intent, REQUEST_CODE_UPDATE_PRODUCT)
             }
         }
     }

@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/cakes_title"
+        style="@style/product_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Torte"
         />
 
     <androidx.recyclerview.widget.RecyclerView
