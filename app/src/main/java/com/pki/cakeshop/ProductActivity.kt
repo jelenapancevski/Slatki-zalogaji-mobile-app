@@ -89,6 +89,10 @@ class ProductActivity : MenuActivity(), OnBackPressedDispatcherOwner {
                 return@setOnClickListener
 
             }
+            if (Integer.parseInt(amount.text.toString())==0){
+                amount.text=null
+                return@setOnClickListener
+            }
             if(pref.getString("order",null)==null){
                 order = Order(user._id, mutableListOf(),Date(),"pending",null)
             }
@@ -104,17 +108,13 @@ class ProductActivity : MenuActivity(), OnBackPressedDispatcherOwner {
             if(!found){
                 order.products.add(ProductInfo(product._id,Integer.parseInt(amount.text.toString())))            }
 
-
-            Log.e("ORDER",order.toString())
+            amount.clearFocus()
+            amount.text=null
             findViewById<TextView>(R.id.message).text = getString(R.string.added_to_basket)
             //save updated order
             val editor = pref.edit()
             editor.putString("order", Gson().toJson(order))
             editor.apply()
-            // treba promeniti
-            val intent = Intent(this@ProductActivity, BasketActivity::class.java)
-            startActivity(intent)
-
         }
 
         newComment = findViewById(R.id.newcomment)
@@ -147,6 +147,13 @@ class ProductActivity : MenuActivity(), OnBackPressedDispatcherOwner {
 
             })
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        findViewById<TextView>(R.id.message).text = null
+        newComment.text = null
+
     }
     private fun hideKeyboard() {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

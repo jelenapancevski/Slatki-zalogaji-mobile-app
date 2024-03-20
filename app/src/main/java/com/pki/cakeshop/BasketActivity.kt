@@ -32,10 +32,10 @@ class BasketActivity : MenuActivity() {
     private val productViewModel: ProductViewModel = ProductViewModel()
     private val orderViewModel: OrderViewModel = OrderViewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basket)
+
         val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
         user = Gson().fromJson(pref.getString("user",null),User::class.java)
 
@@ -44,7 +44,6 @@ class BasketActivity : MenuActivity() {
         }
         else order = Gson().fromJson(pref.getString("order",null), Order::class.java)
 
-        Log.e("ORDER",order.toString())
         val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)
 
         if(order.products.size==0) {

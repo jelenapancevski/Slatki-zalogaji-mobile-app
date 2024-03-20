@@ -88,6 +88,7 @@ open class MenuActivity : AppCompatActivity() {
                 edit.remove("user")
                 edit.remove("product")
                 edit.remove("product_image")
+                edit.apply()
                 val intent = Intent(this,
                     MainActivity::class.java).apply {
                 }

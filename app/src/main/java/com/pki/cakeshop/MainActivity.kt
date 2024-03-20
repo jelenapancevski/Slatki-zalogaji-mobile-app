@@ -22,6 +22,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val pref = getSharedPreferences("data", Context.MODE_PRIVATE)
+        // check if user isn't logged out
+        if(pref.getString("user",null)!=null){
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
         setContentView(R.layout.login)
         message = findViewById(R.id.message)
         username = findViewById(R.id.username)
