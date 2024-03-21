@@ -12,6 +12,7 @@ import com.pki.cakeshop.viewmodels.UserViewModel
 
 class ProfileActivity : MenuActivity() {
     private lateinit var userViewModel: UserViewModel
+    private lateinit var user:User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class ProfileActivity : MenuActivity() {
             Log.e("ProfileActivity", "Error user is null")
             return
         }
-        val user:User = Gson().fromJson(pref.getString("user",null),User::class.java)
+        user = Gson().fromJson(pref.getString("user",null),User::class.java)
 
         findViewById<TextView>(R.id.firstname).text=user.firstname
         findViewById<TextView>(R.id.lastname).text = user.lastname
@@ -45,4 +46,6 @@ class ProfileActivity : MenuActivity() {
             return@setOnClickListener
         }
     }
+
+
 }

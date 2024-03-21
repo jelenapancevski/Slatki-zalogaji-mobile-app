@@ -20,7 +20,7 @@
     <string name="monday_friday">Ponedeljak - Petak</string>
     <string name="working_hours">Radno vreme</string>
     <string name="name_label">Ime:</string>
-    <string name="edit_details">Izmeni detalje</string>
+    <string name="edit_details">Izmeni podatke</string>
     <string name="edit_password">Promeni lozinku</string>
     <string name="lastname_label">Prezime:</string>
     <string name="username_label">Korisničko ime:</string>
@@ -47,6 +47,7 @@
     <string name="passwords_dont_match_message">Lozinke se ne podudaraju</string>
     <string name="password_contains_characters_message">Lozinka mora sadržati bar jedno veliko slovo, jedan specijalan karakter i jednu cifru</string>
     <string name="password_change_error">Greška prilikom promene lozinke</string>
+    <string name="password_length_error"> "Lozinka mora sadržati bar 8 karaktera"</string>
     <string name="password_one_upper_case_error">Lozinka mora sadržati bar jedno veliko slovo</string>
     <string name="password_one_special_character_error">Lozinka mora sadržati bar jedan specijalni karakter</string>
     <string name="password_one_number_error">Lozinka mora sadržati bar jedan broj</string>
@@ -62,7 +63,7 @@
     <string name="successful_login">Prijava je uspešna!</string>
     <string name="login_error">Greška prilikom prijave</string>
     <string name="no_new_notifications">Nemate novih obaveštenja!</string>
-    <string name="status_accepted">Vaša porudžbina kreirana %1$s je prihvaćena.</string>
+    <string name="status_accepted">Vaša porudžbina kreirana %1$s je odobrena!</string>
     <string name="status_denied">Vaša porudžbina kreirana %1$s je odbijena.</string>
     <string name="product_price">Cena %1$s din</string>
     <string name="added_to_basket">Proizvod je uspešno dodat u korpu!</string>

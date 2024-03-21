@@ -63,7 +63,9 @@ class ChangePasswordActivity : MenuActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val password = s.toString()
                 // val isValid = hasUpperCase(password) && hasSpecialCharacter(password) && hasNumber(password)
-
+                if(password.length<8){
+                    findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_length_error)
+                }
                 if(!hasUpperCase(password)){
                     findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_one_upper_case_error)
                 }
@@ -73,6 +75,7 @@ class ChangePasswordActivity : MenuActivity() {
                 if (!hasNumber(password)) {
                     findViewById<EditText>(R.id.newpassword).error = getString(R.string.password_one_number_error)
                 }
+
             }
         })
 
@@ -93,7 +96,7 @@ class ChangePasswordActivity : MenuActivity() {
                 return@setOnClickListener
             }
             //check if password contains all the important elements
-            val isValid = hasUpperCase(newPassword.toString()) && hasSpecialCharacter(newPassword.toString()) && hasNumber(newPassword.toString())
+            val isValid = hasUpperCase(newPassword.toString()) && hasSpecialCharacter(newPassword.toString()) && hasNumber(newPassword.toString()) && (newPassword.toString().length>=8)
             if(!isValid){
                 findViewById<TextView>(R.id.message).text= getString(R.string.password_contains_characters_message)
                 return@setOnClickListener
@@ -109,8 +112,10 @@ class ChangePasswordActivity : MenuActivity() {
                     edit.remove("user")
                     edit.remove("product")
                     edit.remove("product_image")
+                    edit.apply()
                     val intent = Intent(this@ChangePasswordActivity, MainActivity::class.java).apply {
                     }
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 }
 
@@ -122,5 +127,22 @@ class ChangePasswordActivity : MenuActivity() {
             })
 
         }
+    }
+    override fun onRestart() {
+        super.onRestart()
+        findViewById<EditText>(R.id.newpassword).clearFocus()
+        findViewById<EditText>(R.id.currentpassword).clearFocus()
+        findViewById<EditText>(R.id.confirmpassword).clearFocus()
+
+        findViewById<EditText>(R.id.newpassword).text.clear()
+        findViewById<EditText>(R.id.currentpassword).text.clear()
+        findViewById<EditText>(R.id.confirmpassword).text.clear()
+
+        findViewById<EditText>(R.id.newpassword).error = null
+        findViewById<EditText>(R.id.currentpassword).error = null
+        findViewById<EditText>(R.id.confirmpassword).error = null
+
+        findViewById<TextView>(R.id.message).text = null
+
     }
 }

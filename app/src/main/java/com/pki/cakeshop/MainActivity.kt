@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         userViewModel = UserViewModel()
 
         loginButton.setOnClickListener {
+            hideKeyboard()
             if (username.text.isNullOrBlank() || password.text.isNullOrBlank()) {
                 message.text = getString(R.string.username_password_message)
 
@@ -52,13 +54,14 @@ class MainActivity : AppCompatActivity() {
                                     val editor = pref.edit()
                                     editor.putString("user", Gson().toJson(user))
                                     editor.apply()
+                                    message.text = getString(R.string.successful_login)
                                     val intent = Intent(this@MainActivity, HomeActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else {
                                     message.text = getString(R.string.invalid_credentials)
                                 }
-                                message.text = getString(R.string.successful_login)
+
                             } else {
                                 message.text = getString(R.string.invalid_credentials)
                             }
@@ -68,8 +71,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
-                        // Handle failure
-                        message.text = getString(R.string.login_error)
+                        message.text = getString(R.string.invalid_credentials)
                     }
                 })
 
@@ -78,5 +80,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun hideKeyboard(){
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(password.windowToken, 0)
+        inputMethodManager.hideSoftInputFromWindow(username.windowToken, 0)
+    }
+
 
     }

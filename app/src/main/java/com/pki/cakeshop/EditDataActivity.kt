@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.google.gson.Gson
 import com.pki.cakeshop.models.Address
@@ -103,39 +104,42 @@ class EditDataActivity : MenuActivity() {
 
 
         findViewById<Button>(R.id.updatedata).setOnClickListener{
+            var foundError=false
             if(username.text.isNullOrBlank() || firstname.text.isNullOrBlank() ||
                 lastname.text.isNullOrBlank() || street.text.isNullOrBlank() ||
                 number.text.isNullOrBlank() || city.text.isNullOrBlank() || phone.text.isNullOrBlank() ||
                 email.text.isNullOrBlank()){
                 findViewById<TextView>(R.id.message).text = getString(R.string.edit_data_not_provided_error_message)
-                return@setOnClickListener
+                foundError = true
+
 
             }
             //check if username is taken
            if(usernameTaken(user._id,findViewById<TextView>(R.id.username).text.toString())){
                findViewById<TextView>(R.id.message).text = getString(R.string.username_taken_message)
-               return@setOnClickListener
+               foundError = true
            }
             // check if number of street is correct pattern
             if(!streetNumber(findViewById<TextView>(R.id.number).text.toString())){
                 number.error = getString(R.string.address_format_message)
-                return@setOnClickListener
+                foundError = true
             }
             //phone number correct pattern
             if(!phoneNumber(findViewById<TextView>(R.id.phone).text.toString())){
                 phone.error = getString(R.string.phone_format_message)
-                return@setOnClickListener
+                foundError = true
             }
             //email format and taken
             if(!isEmailValid(findViewById<TextView>(R.id.email).text.toString())){
                 email.error = getString(R.string.email_format_message)
-                return@setOnClickListener
+                foundError = true
             }
 
             if(emailTaken(user._id,findViewById<TextView>(R.id.email).text.toString())){
                 findViewById<TextView>(R.id.message).text =  getString(R.string.email_taken_message)
-                return@setOnClickListener
+                foundError = true
             }
+            if(foundError) return@setOnClickListener
 
             //valid update data
             val newUser = User(
@@ -182,6 +186,27 @@ class EditDataActivity : MenuActivity() {
 
             })
         }
+
+    }
+    override fun onRestart() {
+        super.onRestart()
+        firstname.clearFocus()
+        lastname.clearFocus()
+        username.clearFocus()
+        city.clearFocus()
+        street.clearFocus()
+        number.clearFocus()
+        phone.clearFocus()
+        email.clearFocus()
+
+        firstname.text=user.firstname
+        lastname.text = user.lastname
+        username.text = user.username
+        city.text = user.address.city
+        street.text = user.address.street
+        number.text = user.address.number.toString()
+        phone.text = user.phone
+        email.text = user.email
 
     }
 }
