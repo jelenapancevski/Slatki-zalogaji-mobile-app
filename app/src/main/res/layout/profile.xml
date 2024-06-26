@@ -6,130 +6,130 @@
     android:layout_height="match_parent"
     android:background="@drawable/profilebackground"
     >
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/white"
         android:padding="5dp"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-
-
             >
 
             <Button
                 android:id="@+id/changepassword"
                 style="@style/profile_buttons"
                 android:text="@string/edit_password"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/editdata"
                 style="@style/profile_buttons"
                 android:text="@string/edit_details"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 style="@style/profile_row"
-                android:text="@string/name_label"
-               >
-            </TextView>
+                android:text="@string/name_label"/>
+
             <TextView
+                android:layout_marginEnd="10dp"
                 android:id="@+id/firstname"
-                style="@style/profile_row"
-                >
-            </TextView>
+                style="@style/profile_row"/>
 
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 style="@style/profile_row"
-                android:text="@string/lastname_label"
-                >
-            </TextView>
+                android:text="@string/lastname_label"/>
+
             <TextView
+                android:layout_marginEnd="10dp"
                 android:id="@+id/lastname"
-                style="@style/profile_row"
-                >
-            </TextView>
+                style="@style/profile_row"/>
 
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <TextView
                 style="@style/profile_row"
-                android:text="@string/username_label"/>
+                android:text="@string/username_label" />
+
             <TextView
+                android:layout_marginEnd="10dp"
                 android:id="@+id/username"
-                style="@style/profile_row"
-                >
-            </TextView>
+                style="@style/profile_row"/>
 
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 style="@style/profile_row"
-                android:text="@string/address_label"
-                >
-            </TextView>
+                android:text="@string/address_label"/>
+
             <TextView
-                style="@style/profile_row"
+                android:layout_marginEnd="10dp"
                 android:id="@+id/address"
-                >
-            </TextView>
-
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-
-            <TextView
+                android:singleLine="false"
                 style="@style/profile_row"
-                android:text="@string/phone_label"/>
-            <TextView
-                style="@style/profile_row"
-                android:id="@+id/phone"
+                android:layout_height="wrap_content"
                 />
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                style="@style/profile_row"
+                android:text="@string/phone_label" />
+
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:id="@+id/phone"
+                style="@style/profile_row" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <TextView
                 style="@style/profile_row"
                 android:text="@string/email_label" />
+
             <TextView
-                style="@style/profile_row"
+                android:layout_marginEnd="10dp"
                 android:id="@+id/email"
-                />
+                style="@style/profile_row" />
 
 
         </TableRow>

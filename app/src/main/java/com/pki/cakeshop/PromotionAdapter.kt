@@ -24,7 +24,6 @@ class PromotionAdapter (private val promotions: List<Promotion>, private val lay
         val text: TextView
 
         init {
-            // Define click listener for the ViewHolder's View
             title = view.findViewById(R.id.promotion_title)
             image = view.findViewById(R.id.promotion_image)
             text = view.findViewById(R.id.promotion_text)
@@ -56,20 +55,17 @@ class PromotionAdapter (private val promotions: List<Promotion>, private val lay
             text.text = promotion.description
         }
     }
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): PromotionViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(layout, viewGroup, false)
         return PromotionViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: PromotionViewHolder, position: Int) {
         val promotion = promotions[position]
         viewHolder.bind(promotion)
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = promotions.size
 
     }

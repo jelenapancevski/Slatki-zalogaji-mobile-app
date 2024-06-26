@@ -29,7 +29,6 @@ class ItemAdapter (private val productsInfo: MutableList<ProductInfo>, private v
        private val deleteButton: ImageView
 
         init {
-            // Define click listener for the ViewHolder's View
            image = view.findViewById(R.id.image)
            name = view.findViewById(R.id.name)
            quantity = view.findViewById(R.id.quantity)
@@ -91,21 +90,18 @@ class ItemAdapter (private val productsInfo: MutableList<ProductInfo>, private v
             }
         }
     }
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item, viewGroup, false)
         return ItemViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         val productInfo = productsInfo[position]
         val product = products[position]
         viewHolder.bind(productInfo,product)
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = productsInfo.size
 
     }

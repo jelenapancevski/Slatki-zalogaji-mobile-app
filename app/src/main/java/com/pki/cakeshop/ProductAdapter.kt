@@ -20,7 +20,6 @@ class ProductAdapter ( private val context: Context, private val products: List<
 
 
        init {
-            // Define click listener for the ViewHolder's View
             name = view.findViewById(R.id.product_name)
             image = view.findViewById(R.id.product_image)
         }
@@ -51,21 +50,18 @@ class ProductAdapter ( private val context: Context, private val products: List<
             }
         }
     }
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.products, viewGroup, false)
         return ProductViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ProductViewHolder, position: Int) {
         val product = products[position]
         val image = images[product._id+"."+product.image]
         viewHolder.bind(product,image)
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = products.size
 
     }

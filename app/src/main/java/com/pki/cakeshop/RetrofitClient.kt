@@ -13,22 +13,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:4000/"
-    // Create a logging interceptor for debugging purposes
+
     private val loggingInterceptor = HttpLoggingInterceptor { message ->
-        Log.d("Retrofit", message) // Custom tag "Retrofit" is used here
+        Log.d("Retrofit", message)
     }.apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
     private val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
-        // Add any other OkHttpClient configurations if needed
         .build()
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create())
-            // Add any other configurations if needed (e.g., OkHttpClient with interceptors)
             .build()
     }
     val promotionService: PromotionService by lazy {

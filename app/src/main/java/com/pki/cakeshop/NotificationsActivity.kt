@@ -53,6 +53,8 @@ class NotificationsActivity : MenuActivity() {
                         override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                             if (response.isSuccessful) {
                                 notifications = response.body()!!
+                                notifications = notifications.sortedByDescending { it.date }
+
                                 notificationsContainer = findViewById(R.id.notifications)
 
                                 val viewFlipper = findViewById<ViewFlipper>(R.id.viewFlipper)

@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                                     val editor = pref.edit()
                                     editor.putString("user", Gson().toJson(user))
                                     editor.apply()
-                                    message.text = getString(R.string.successful_login)
+                                    message.text = "" //getString(R.string.successful_login)
                                     val intent = Intent(this@MainActivity, HomeActivity::class.java)
                                     startActivity(intent)
                                 }
